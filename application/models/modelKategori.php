@@ -1,6 +1,6 @@
 <?php
 
-class modelKategori extends CI_Model{
+class ModelKategori extends CI_Model{
 	var $table = "kategori";
     var $primaryKey = "id_kategori";
 

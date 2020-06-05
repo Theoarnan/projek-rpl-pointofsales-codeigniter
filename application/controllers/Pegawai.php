@@ -6,13 +6,13 @@ class Pegawai extends CI_Controller {
         parent::__construct();
         checkNoLogin();
         roleAkses();
-        $this->load->model("modelPegawai");
+        $this->load->model("ModelPegawai");
     }
     
     public function index(){
-        $listPegawai = $this->modelPegawai->getAll();
+        $listPegawai = $this->ModelPegawai->getAll();
         $data = array(
-            "page" => "content/Pegawai/v_list_pegawai",
+            "page" => "Content/Pegawai/v_list_pegawai",
             "header" => "Daftar Pegawai",
             "pegawais" => $listPegawai
         );
@@ -22,7 +22,7 @@ class Pegawai extends CI_Controller {
     public function register(){
         $data = array(
             "header" => "Tambah Data Pegawai",
-            "page" => "content/Pegawai/v_add_pegawai"
+            "page" => "Content/Pegawai/v_add_pegawai"
         );
         $this->load->view("layout/dashboard", $data);
     }
@@ -35,15 +35,15 @@ class Pegawai extends CI_Controller {
             "jabatan" => $this->input->post('jbtn'),
             "no_telp" => $this->input->post('nomer')
         );
-        $this->modelPegawai->insert($pegawai);
+        $this->ModelPegawai->insert($pegawai);
         redirect('Pegawai/register');
     }
 
     public function update($id){
-        $listPegawai = $this->modelPegawai->getByPrimaryKey($id);
+        $listPegawai = $this->ModelPegawai->getByPrimaryKey($id);
         $data = array(
             "pegawais" => $listPegawai,
-            "page" => "content/Pegawai/v_update_pegawai"
+            "page" => "Content/Pegawai/v_update_pegawai"
         );
         $this->load->view("layout/dashboard", $data);
     }
@@ -62,23 +62,23 @@ class Pegawai extends CI_Controller {
             "jabatan" => $jbtn,
             "no_telp" => $nomer
 		);
-		$this->modelPegawai->update($id, $pegawais);
+		$this->ModelPegawai->update($id, $pegawais);
 		redirect("Pegawai");
     }
     
     public function proses_hapus($id) {
-		$this->modelPegawai->delete($id);
+		$this->ModelPegawai->delete($id);
 		redirect("Pegawai");
     }
     
     // Cetak data Barang
     function printDataPegawai()
     {
-        $listPegawai = $this->modelPegawai->getAll();
+        $listPegawai = $this->ModelPegawai->getAll();
         $data = array(
             "pegawais" => $listPegawai,
         );
-        $html = $this->load->view('content/pegawai/print/datapegawai_print', $data, true);
+        $html = $this->load->view('Content/Pegawai/print/datapegawai_print', $data, true);
         $this->fungsi->createPDF($html, 'Print Data Pegawai', 'A4', 'potrait');
     }
 }

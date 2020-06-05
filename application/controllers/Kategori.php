@@ -8,14 +8,14 @@ class Kategori extends CI_Controller
         parent::__construct();
         checkNoLogin();
         roleAkses();
-        $this->load->model("modelKategori");
+        $this->load->model("ModelKategori");
     }
 
     public function index()
     {
-        $listKategori = $this->modelKategori->getAll();
+        $listKategori = $this->ModelKategori->getAll();
         $data = array(
-            "page" => "content/kategoribrg/v_list_kat",
+            "page" => "Content/KategoriBrg/v_list_kat",
             "header" => "Daftar Kategori",
             "kategories" => $listKategori
         );
@@ -29,7 +29,7 @@ class Kategori extends CI_Controller
         $kategori->nama_kategori = null;
         $data = array(
             "header" => "Tambah Data Kategori",
-            "page" => "content/kategoribrg/modal",
+            "page" => "Content/KategoriBrg/modal",
             "pages" => 'register',
             "suppliers" => $kategori
         );
@@ -38,7 +38,7 @@ class Kategori extends CI_Controller
 
     public function update($id)
     {
-        $listKategori = $this->modelKategori->getByPrimaryKey($id);
+        $listKategori = $this->ModelKategori->getByPrimaryKey($id);
         $data = array(
             "pages" => 'update',
             "suppliers" => $listKategori
@@ -51,7 +51,7 @@ class Kategori extends CI_Controller
         $kategori = array(
             "nama_kategori" => $this->input->post('nama_kategori'),
         );
-        $this->modelKategori->insert($kategori);
+        $this->ModelKategori->insert($kategori);
         if($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data Sukses disimpan');
         }
@@ -65,7 +65,7 @@ class Kategori extends CI_Controller
         $kategori = array(
             "nama_kategori" => $nama,
         );
-        $this->modelKategori->update($id, $kategori);
+        $this->ModelKategori->update($id, $kategori);
         if($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data Sukses diupdate');
         }
@@ -74,7 +74,7 @@ class Kategori extends CI_Controller
 
     public function proses_delete($id)
     {
-        $this->modelKategori->delete($id);
+        $this->ModelKategori->delete($id);
         if($this->db->affected_rows() > 0) {
             $this->session->set_flashdata('success', 'Data Sukses dihapus');
         }

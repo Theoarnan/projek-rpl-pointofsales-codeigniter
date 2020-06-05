@@ -10,7 +10,7 @@ class Welcome extends CI_Controller {
         // checkNoLogin();
         // roleAkses2();
         // roleAkses();
-        $this->load->model(array("modelBarang", "modelPegawai", "modelSupplier", "userModel", "ModelTransaksi", "modelStocks", "ModelItemTransaksi", "ModelTundaTransaksi"));
+        $this->load->model(array("ModelBarang", "ModelPegawai", "ModelSupplier", "UserModel", "ModelTransaksi", "ModelStocks", "ModelItemTransaksi", "ModelTundaTransaksi"));
 	}
 	
 	public function index()
@@ -18,16 +18,16 @@ class Welcome extends CI_Controller {
 		// $tanggal_start = $this->input->get("tanggal_start", TRUE);
 		// $tanggal_end = $this->input->get("tanggal_end", TRUE);
 		// die($tanggal_start. "===" .$tanggal_end);
-		$barang = $this->modelBarang->hitungBarang();
-		$pegawai = $this->modelPegawai->hitungPegawai();
-		$supplier = $this->modelSupplier->hitungSupplier();
-		$user = $this->userModel->hitungUser();
+		$barang = $this->ModelBarang->hitungBarang();
+		$pegawai = $this->ModelPegawai->hitungPegawai();
+		$supplier = $this->ModelSupplier->hitungSupplier();
+		$user = $this->UserModel->hitungUser();
 		$topSale = $this->ModelTransaksi->topSale();
 		$recentSale = $this->ModelTransaksi->recentSale();
-		$stockSisa = $this->modelBarang->hitungStockSisa();
+		$stockSisa = $this->ModelBarang->hitungStockSisa();
 		$pendapatan = $this->ModelTransaksi->hitungPendapatan();
-		$stockIn = $this->modelStocks->hitungStockIn();
-		$stockOut = $this->modelStocks->hitungStockOut();
+		$stockIn = $this->ModelStocks->hitungStockIn();
+		$stockOut = $this->ModelStocks->hitungStockOut();
 		$barangterjual = $this->ModelItemTransaksi->hitungItemTerjual();
 		$transaksi = $this->ModelTransaksi->hitungTransaksi();
 		$allTransaksi = $this->ModelTransaksi->getJoin();

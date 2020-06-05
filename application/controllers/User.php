@@ -8,14 +8,14 @@ class User extends CI_Controller
         parent::__construct();
         checkNoLogin();
         roleAkses();
-        $this->load->model(['userModel', 'modelPegawai']);
+        $this->load->model(['UserModel', 'ModelPegawai']);
     }
 
     public function index()
     {
-        $listUser = $this->userModel->getJoin();
+        $listUser = $this->UserModel->getJoin();
         $data = array(
-            "page" => "content/User/v_list_user",
+            "page" => "Content/User/v_list_user",
             "users" => $listUser,
             "header" => "Daftar User"
         );
@@ -33,11 +33,11 @@ class User extends CI_Controller
         $user->is_active = null;
         $user->pegawai_id = null;
 
-        $pegawai = $this->modelPegawai->getJoinJabatan();
+        $pegawai = $this->ModelPegawai->getJoinJabatan();
 
         $data = array(
             "header" => "Tambah Data User",
-            "page" => "content/User/v_add_user",
+            "page" => "Content/User/v_add_user",
             "pegawais" => $pegawai,
             "users" => $user,
         );
@@ -52,7 +52,7 @@ class User extends CI_Controller
 		$user["password"] = password_hash($passwordRandom,PASSWORD_DEFAULT);
         $user["token"] = md5($user["email"]);
         $user["first_login"] = 1;
-        $this->userModel->insert($user);
+        $this->UserModel->insert($user);
 		$user["password_generated"] = $passwordRandom;
         sendEmail("Aktivasi Akun",$user, "register");
         redirect("User");
@@ -61,9 +61,9 @@ class User extends CI_Controller
     // Aktivasi Akun
     public function aktivasi($token)
     {
-        $user = $this->userModel->getByToken($token);
+        $user = $this->UserModel->getByToken($token);
         $data = array("is_active" => 1);
-        $this->userModel->update($user->id_user, $data);
+        $this->UserModel->update($user->id_user, $data);
         redirect("login");
     }
 
@@ -72,7 +72,7 @@ class User extends CI_Controller
 		//1. ambil parameter form
 		$idUser = $this->input->post("id_user");
 		//2. buat objek user
-		$user = $this->userModel->getByPrimaryKey($idUser);
+		$user = $this->UserModel->getByPrimaryKey($idUser);
 		//3. buat random password
 		$passwordRandom = randomPassword();
 		//4. set random password ke objek user
@@ -80,17 +80,17 @@ class User extends CI_Controller
 		$user["password"] = password_hash($passwordRandom,PASSWORD_DEFAULT);
 		$user["first_login"] = 1;
 		//5. simpan user
-		$this->userModel->update($idUser,$user);
+		$this->UserModel->update($idUser,$user);
 		$user["password_generated"] = $passwordRandom;
-		echo sendEmail("Reset Password",$user,"Reset");
+		echo sendEmail("Reset Password",$user,"reset");
 	}
 
     public function update($id)
     {
-        $listUser = $this->userModel->getByPrimaryKey($id);
+        $listUser = $this->UserModel->getByPrimaryKey($id);
         $data = array(
             "users" => $listUser,
-            "page" => "content/User/v_update_user",
+            "page" => "Content/User/v_update_user",
             "header" => "Ubah Data User",
         );
         $this->load->view("layout/dashboard", $data);
@@ -117,7 +117,7 @@ class User extends CI_Controller
 
     public function proses_hapus($id)
     {
-        $this->userModel->delete($id);
+        $this->UserModel->delete($id);
         redirect("User");
     }
 }

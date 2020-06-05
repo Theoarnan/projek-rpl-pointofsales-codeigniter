@@ -10,7 +10,7 @@ class Transaksi extends CI_Controller
         parent::__construct();
         checkNoLogin();
         // roleAkses();
-        $this->load->model(array("modelBarang", "ModelTransaksi", "ModelItemTransaksi", "modelKeranjang", "ModelTundaItemTransaksi", "ModelTundaTransaksi"));
+        $this->load->model(array("ModelBarang", "ModelTransaksi", "ModelItemTransaksi", "ModelKeranjang", "ModelTundaItemTransaksi", "ModelTundaTransaksi"));
     }
 
     // Data Transaksi
@@ -33,7 +33,7 @@ class Transaksi extends CI_Controller
         $data = array(
             "header" => "Data Tunda Transaksi",
             "tunda" => $listTransaksi,
-            "page" => "content/app/tunda/v_data_tunda"
+            "page" => "Content/App/tunda/v_data_tunda"
         );
         $this->load->view("layout/dashboard", $data);
     }
@@ -42,20 +42,20 @@ class Transaksi extends CI_Controller
     function get_barang()
     {
         $kode = $this->input->post('barcode_barang');
-        $data = $this->modelBarang->get_data_barang_bykode($kode);
+        $data = $this->ModelBarang->get_data_barang_bykode($kode);
         echo json_encode($data);
     }
 
     // Aplikasi Kasir
     public function app()
     {
-        $listBarang = $this->modelBarang->getAll();
-        $keranjang = $this->modelKeranjang->getKeranjang();
+        $listBarang = $this->ModelBarang->getAll();
+        $keranjang = $this->ModelKeranjang->getKeranjang();
         $data = array(
             "header" => "Aplikasi Kasir",
             "barangs" => $listBarang,
             "keranjang" => $keranjang,
-            "page" => "content/App/v_form_app"
+            "page" => "Content/App/v_form_app"
         );
         $this->load->view("layout/dashboard", $data);
     }
@@ -69,7 +69,7 @@ class Transaksi extends CI_Controller
             "header" => "Aplikasi Kasir",
             "items" => $listItem,
             "transaksis" => $transaksi,
-            "page" => "content/transaksi/v_detail_transaksi"
+            "page" => "Content/Transaksi/v_detail_transaksi"
         );
         $this->load->view("layout/dashboard", $data);
     }
@@ -83,11 +83,11 @@ class Transaksi extends CI_Controller
             $idBarang = $this->input->post('id_barang');
             // $cekQtyTemp = $this->input->post('qty');
             // $QtyBarang = $this->modelBarang->getQtyBarang($idBarang);
-            $cekQty = $this->modelKeranjang->getKeranjang(['temp_keranjang.barang_id' => $idBarang])->num_rows();
+            $cekQty = $this->ModelKeranjang->getKeranjang(['temp_keranjang.barang_id' => $idBarang])->num_rows();
                 if ($cekQty > 0) {
-                    $this->modelKeranjang->updateCartQty($data);
+                    $this->ModelKeranjang->updateCartQty($data);
                 } else {
-                    $this->modelKeranjang->insertCart($data);
+                    $this->ModelKeranjang->insertCart($data);
                 }
 
             if ($this->db->affected_rows() > 0) {
@@ -99,7 +99,7 @@ class Transaksi extends CI_Controller
         }  // Proses Transaksi
         else if (isset($_POST['proses_transaksi'])) {
             $transaksi_id = $this->ModelTransaksi->insertGetId($data);
-            $keranjang = $this->modelKeranjang->getKeranjang()->result();
+            $keranjang = $this->ModelKeranjang->getKeranjang()->result();
             // $index = 0;
             $row = [];
             foreach ($keranjang as $k => $value) {
@@ -115,7 +115,7 @@ class Transaksi extends CI_Controller
                 );
             }
             $this->ModelTransaksi->insertBatch($row);
-            $this->modelKeranjang->delete_data_keranjang(['user_id' => $this->session->userdata('idUser')]);
+            $this->ModelKeranjang->delete_data_keranjang(['user_id' => $this->session->userdata('idUser')]);
             if ($this->db->affected_rows() > 0) {
                 $data = array("success" => true, "id_transaksi" => $transaksi_id);
             } else {
@@ -125,7 +125,7 @@ class Transaksi extends CI_Controller
         } // Proses Tunda Transaksi
         else if (isset($_POST['tunda_transaksi'])) {
             $transaksi_id = $this->ModelTundaTransaksi->insertGetTundaId($data);
-            $keranjang = $this->modelKeranjang->getKeranjang()->result();
+            $keranjang = $this->ModelKeranjang->getKeranjang()->result();
             // $index = 0;
             $row = [];
             foreach ($keranjang as $k => $value) {
@@ -141,7 +141,7 @@ class Transaksi extends CI_Controller
                 );
             }
             $this->ModelTundaItemTransaksi->insertBatchTunda($row);
-            $this->modelKeranjang->delete_data_keranjang(['user_id' => $this->session->userdata('idUser')]);
+            $this->ModelKeranjang->delete_data_keranjang(['user_id' => $this->session->userdata('idUser')]);
             if ($this->db->affected_rows() > 0) {
                 $data = array("success" => true);
             } else {
@@ -154,19 +154,19 @@ class Transaksi extends CI_Controller
     // Ambil data dari temp_keranjang
     public function keranjang_data()
     {
-        $keranjang = $this->modelKeranjang->getKeranjang();
+        $keranjang = $this->ModelKeranjang->getKeranjang();
         $data['keranjang'] = $keranjang;
-        $this->load->view('content/app/keranjang_data', $data);
+        $this->load->view('Content/App/keranjang_data', $data);
     }
 
     //Hapus Keranjang
     public function delete_keranjang_data()
     {
         if (isset($_POST['batal_transaksi'])) {
-            $this->modelKeranjang->delete_data_keranjang(['user_id' => $this->session->userdata('idUser')]);
+            $this->ModelKeranjang->delete_data_keranjang(['user_id' => $this->session->userdata('idUser')]);
         } else {
             $keranjangData =  $this->input->post('id_keranjang');
-            $this->modelKeranjang->delete_data_keranjang(['id_keranjang' => $keranjangData]);
+            $this->ModelKeranjang->delete_data_keranjang(['id_keranjang' => $keranjangData]);
         }
 
         if ($this->db->affected_rows() > 0) {
@@ -197,7 +197,7 @@ class Transaksi extends CI_Controller
                 )
             );
         }
-        $this->modelKeranjang->insertBatchTundaTransaksi($row);
+        $this->ModelKeranjang->insertBatchTundaTransaksi($row);
         $this->ModelTundaItemTransaksi->delete_tundaitemtransaksi(['id_transaksi_tunda' => $id]);
         $this->ModelTundaTransaksi->delete_tundatransaksi(['id_transaksi_tunda' => $id]);
         if ($this->db->affected_rows() > 0) {
@@ -215,7 +215,7 @@ class Transaksi extends CI_Controller
             'transaksi' => $this->ModelTransaksi->getTransaksiById($id),
             'itemTransaksi' => $this->ModelItemTransaksi->getItemTransaksi($id)
         );
-        $this->load->view("Content/App/Print/print_struk", $data);
+        $this->load->view("Content/App/print/print_struk", $data);
     }
 
     public function printDataTransaksi()
@@ -224,7 +224,7 @@ class Transaksi extends CI_Controller
         $data = array(
             "transaksis" => $listTransaksi,
         );
-        $html = $this->load->view('content/transaksi/print/datatransaksi_print', $data, true);
+        $html = $this->load->view('Content/Transaksi/print/datatransaksi_print', $data, true);
         $this->fungsi->createPDF($html, 'Print Data Transaksi', 'A4', 'landscape');
     }
 }

@@ -76,13 +76,16 @@
                                 <i class="fas fa-donate nav-icon"></i>
                                 <p>Data Transaksi</p>
                             </a>
+                            <?php if ($this->fungsi->user_login()->level == 1) { ?>
                             <a href="<?= site_url(array("Stocks", "riwayatStock")) ?>" class="nav-link">
                                 <i class="fas fa-dolly nav-icon"></i>
                                 <p>Data Stock</p>
                             </a>
+                            <?php } ?>
                         </li>
                     </ul>
                 </li>
+                <?php if ($this->fungsi->user_login()->level == 1) { ?>
                 <li class="nav-item has-treeview">
                     <a href="<?= site_url("Laporan") ?>" class="nav-link">
                         <i class="nav-icon fas fa-chart-line"></i>
@@ -91,6 +94,7 @@
                         </p>
                     </a>
                 </li>
+                <?php } ?>
             </ul>
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

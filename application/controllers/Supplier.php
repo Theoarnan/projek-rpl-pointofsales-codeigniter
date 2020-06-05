@@ -8,14 +8,14 @@ class Supplier extends CI_Controller
         parent::__construct();
         checkNoLogin();
         roleAkses();
-        $this->load->model("modelSupplier");
+        $this->load->model("ModelSupplier");
     }
 
     public function index()
     {
-        $listSupplier = $this->modelSupplier->getAll();
+        $listSupplier = $this->ModelSupplier->getAll();
         $data = array(
-            "page" => "content/supplier/v_list_supplier",
+            "page" => "Content/Supplier/v_list_supplier",
             "header" => "Daftar Supplier",
             "suppliers" => $listSupplier
         );
@@ -32,7 +32,7 @@ class Supplier extends CI_Controller
         $supplier->deskripsi = null;
         $data = array(
             "header" => "Tambah Data Supplier",
-            "page" => "content/supplier/v_form_supplier",
+            "page" => "Content/Supplier/v_form_supplier",
             "pages" => 'register',
             "suppliers" => $supplier
         );
@@ -41,10 +41,10 @@ class Supplier extends CI_Controller
 
     public function update($id)
     {
-        $listSupplier = $this->modelSupplier->getByPrimaryKey($id);
+        $listSupplier = $this->ModelSupplier->getByPrimaryKey($id);
         $data = array(
             "header" => "Tambah Data Supplier",
-            "page" => "content/supplier/v_form_supplier",
+            "page" => "Content/Supplier/v_form_supplier",
             "pages" => 'update',
             "suppliers" => $listSupplier
         );
@@ -62,7 +62,7 @@ class Supplier extends CI_Controller
                 "deskripsi" => $this->input->post('desk'),
                 "no_telp" => $this->input->post('no_telpon')
             );
-            $this->modelSupplier->insert($supplier);
+            $this->ModelSupplier->insert($supplier);
             redirect('Supplier/register');
         }
         // Proses Update data Supplier
@@ -78,7 +78,7 @@ class Supplier extends CI_Controller
                 "deskripsi" => $desk,
                 "no_telp" => $telp
             );
-            $this->modelSupplier->update($id, $supplier);
+            $this->ModelSupplier->update($id, $supplier);
             
         }
         if($this->db->affected_rows() > 0) {
@@ -88,7 +88,7 @@ class Supplier extends CI_Controller
     }
 
     public function proses_hapus($id) {
-		$this->modelSupplier->delete($id);
+		$this->ModelSupplier->delete($id);
 		redirect("Supplier");
 	}
 }

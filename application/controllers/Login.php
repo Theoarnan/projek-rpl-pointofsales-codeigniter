@@ -6,7 +6,7 @@ class Login extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model("userModel");
+        $this->load->model("UserModel");
     }
 
     public function index()
@@ -23,7 +23,7 @@ class Login extends CI_Controller
         $username =  $this->input->post("email", TRUE);
         // $email =  $this->input->post("username", TRUE);
         $password =  $this->input->post("password", TRUE);
-        $user = $this->userModel->getByEmailAndPassword($username, $password);
+        $user = $this->UserModel->getByEmailAndPassword($username, $password);
         if ($user == null) {
             $this->error_login("Email, Username atau password tidak ditemukan");
         } else {

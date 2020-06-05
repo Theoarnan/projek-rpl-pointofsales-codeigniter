@@ -10,8 +10,8 @@ class Laporan extends CI_Controller
         checkOnLogin();
         // checkNoLogin();
         // roleAkses2();
-        // roleAkses();
-        $this->load->model(array("modelBarang", "modelPegawai", "modelSupplier", "userModel", "ModelTransaksi", "modelStocks", "ModelItemTransaksi", "ModelTundaTransaksi"));
+        roleAkses();
+        $this->load->model(array("ModelBarang", "ModelPegawai", "ModelSupplier", "UserModel", "ModelTransaksi", "ModelStocks", "ModelItemTransaksi", "ModelTundaTransaksi"));
         $this->load->library('form_validation');
     }
 
@@ -23,15 +23,15 @@ class Laporan extends CI_Controller
             $mulai = date('Y-m-d');
             $akhir = date('Y-m-d');
             // Aksi
-            $stockSisa = $this->modelBarang->hitungStockSisa(['mulai' => $mulai, 'akhir' => $akhir]);
+            $stockSisa = $this->ModelBarang->hitungStockSisa(['mulai' => $mulai, 'akhir' => $akhir]);
             $pendapatan = $this->ModelTransaksi->hitungPendapatan(['mulai' => $mulai, 'akhir' => $akhir]);
-            $stockIn = $this->modelStocks->hitungStockIn(['mulai' => $mulai, 'akhir' => $akhir]);
-            $stockOut = $this->modelStocks->hitungStockOut(['mulai' => $mulai, 'akhir' => $akhir]);
+            $stockIn = $this->ModelStocks->hitungStockIn(['mulai' => $mulai, 'akhir' => $akhir]);
+            $stockOut = $this->ModelStocks->hitungStockOut(['mulai' => $mulai, 'akhir' => $akhir]);
             $barangterjual = $this->ModelItemTransaksi->hitungItemTerjual(['mulai' => $mulai, 'akhir' => $akhir]);
             $transaksi = $this->ModelTransaksi->hitungTransaksi(['mulai' => $mulai, 'akhir' => $akhir]);
             $listTransaksi = $this->ModelTransaksi->getAlls(['mulai' => $mulai, 'akhir' => $akhir]);
             $data = array(
-                "page" => "content/laporan/v_data_laporan",
+                "page" => "Content/Laporan/v_data_laporan",
                 "header" => "Laporan",
                 "pendapatan" => $pendapatan,
                 "stockin" => $stockIn,
@@ -53,15 +53,15 @@ class Laporan extends CI_Controller
             $akhir = date('Y-m-d', strtotime(end($pecah)));
 
             $pendapatan = $this->ModelTransaksi->hitungPendapatan(['mulai' => $mulai, 'akhir' => $akhir]);
-            $stockSisa = $this->modelBarang->hitungStockSisa(['mulai' => $mulai, 'akhir' => $akhir]);
-            $stockIn = $this->modelStocks->hitungStockIn(['mulai' => $mulai, 'akhir' => $akhir]);
-            $stockOut = $this->modelStocks->hitungStockOut(['mulai' => $mulai, 'akhir' => $akhir]);
+            $stockSisa = $this->ModelBarang->hitungStockSisa(['mulai' => $mulai, 'akhir' => $akhir]);
+            $stockIn = $this->ModelStocks->hitungStockIn(['mulai' => $mulai, 'akhir' => $akhir]);
+            $stockOut = $this->ModelStocks->hitungStockOut(['mulai' => $mulai, 'akhir' => $akhir]);
             $barangterjual = $this->ModelItemTransaksi->hitungItemTerjual(['mulai' => $mulai, 'akhir' => $akhir]);
             $transaksi = $this->ModelTransaksi->hitungTransaksi(['mulai' => $mulai, 'akhir' => $akhir]);
             $listTransaksi = $this->ModelTransaksi->getAlls(['mulai' => $mulai, 'akhir' => $akhir]);
 
             $data = array(
-                "page" => "content/laporan/v_data_laporan",
+                "page" => "Content/Laporan/v_data_laporan",
                 "header" => "Laporan",
                 "pendapatan" => $pendapatan,
                 "stockin" => $stockIn,

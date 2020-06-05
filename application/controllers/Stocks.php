@@ -9,14 +9,14 @@ class Stocks extends CI_Controller
         parent::__construct();
         checkNoLogin();
         roleAkses();
-        $this->load->model(['modelStocks', 'modelBarang', 'userModel', 'modelSupplier']);
+        $this->load->model(['ModelStocks', 'ModelBarang', 'UserModel', 'ModelSupplier']);
     }
 
     public function index()
     {
-        $listStock = $this->modelStocks->getJoin();
+        $listStock = $this->ModelStocks->getJoin();
         $data = array(
-            "page" => "content/Stock/stock_in/v_data_stockin",
+            "page" => "Content/Stock/stock_in/v_data_stockin",
             "header" => "Data Stock IN",
             "stocks" => $listStock
         );
@@ -25,9 +25,9 @@ class Stocks extends CI_Controller
 
     public function indexOut()
     {
-        $listStock = $this->modelStocks->getJoin2();
+        $listStock = $this->ModelStocks->getJoin2();
         $data = array(
-            "page" => "content/Stock/stock_out/v_data_stockout",
+            "page" => "Content/Stock/stock_out/v_data_stockout",
             "header" => "Data Stock Out",
             "stocks" => $listStock
         );
@@ -36,9 +36,9 @@ class Stocks extends CI_Controller
 
     public function riwayatStock()
     {
-        $listStock = $this->modelStocks->getJoin3();
+        $listStock = $this->ModelStocks->getJoin3();
         $data = array(
-            "page" => "content/Stock/v_all_data_stock",
+            "page" => "Content/Stock/v_all_data_stock",
             "header" => "Data Stock",
             "stocks" => $listStock,
             // "stockss" => $listStocks
@@ -58,12 +58,12 @@ class Stocks extends CI_Controller
         $stk->supplier_id = null;
         $stk->user_id = null;
 
-        $barang = $this->modelBarang->getJoin();
-        $supplier = $this->modelSupplier->getAll();
+        $barang = $this->ModelBarang->getJoin();
+        $supplier = $this->ModelSupplier->getAll();
 
         $data = array(
             "header" => "ADD STOCK IN",
-            "page" => "content/Stock/stock_in/v_form_stockin",
+            "page" => "Content/Stock/stock_in/v_form_stockin",
             "pages" => 'In',
             "stocks" => $stk,
             "barangs" => $barang,
@@ -82,11 +82,11 @@ class Stocks extends CI_Controller
         $stk->tanggal = null;
         $stk->barang_id = null;
         $stk->user_id = null;
-        $barang = $this->modelBarang->getJoin();
+        $barang = $this->ModelBarang->getJoin();
 
         $data = array(
             "header" => "ADD STOCK OUT",
-            "page" => "content/Stock/stock_out/v_form_stockout",
+            "page" => "Content/Stock/stock_out/v_form_stockout",
             "pages" => 'Out',
             "stocks" => $stk,
             "barangs" => $barang,
@@ -111,8 +111,8 @@ class Stocks extends CI_Controller
                 "user_id" => $this->session->userdata('idUser'),
                 'barang_id' => $this->input->post('barang')
             );
-            $this->modelBarang->updateStock($jumlah, $id);
-            $this->modelStocks->insert($stock);
+            $this->ModelBarang->updateStock($jumlah, $id);
+            $this->ModelStocks->insert($stock);
             if ($this->db->affected_rows() > 0) {
                 $this->session->set_flashdata('success', 'Data Stock-in Sukses disimpan');
             }
@@ -131,8 +131,8 @@ class Stocks extends CI_Controller
                 "user_id" => $this->session->userdata('idUser'),
                 'barang_id' => $this->input->post('barang')
             );
-            $this->modelBarang->kurangStock($jumlah, $id);
-            $this->modelStocks->insert($stock);
+            $this->ModelBarang->kurangStock($jumlah, $id);
+            $this->ModelStocks->insert($stock);
             if ($this->db->affected_rows() > 0) {
                 $this->session->set_flashdata('success', 'Data Stock-in Sukses disimpan');
             }

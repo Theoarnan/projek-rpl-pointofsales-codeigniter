@@ -7,22 +7,22 @@ class Barang extends CI_Controller
         parent::__construct();
         checkNoLogin();
         roleAkses();
-        $this->load->model(['modelBarang', 'modelKategori']);
+        $this->load->model(['ModelBarang', 'ModelKategori']);
     }
 
     // Ambil data barang untuk transaksi scan berdasarkan barcode
     function get_barang()
     {
         $kode = $this->input->post('barcode_barang');
-        $data = $this->modelBarang->get_data_barang_bykode($kode);
+        $data = $this->ModelBarang->get_data_barang_bykode($kode);
         echo json_encode($data);
     }
 
     public function index()
     {
-        $listBarang = $this->modelBarang->getJoin();
+        $listBarang = $this->ModelBarang->getJoin();
         $data = array(
-            "page" => "content/barang/v_list_item",
+            "page" => "Content/Barang/v_list_item",
             "header" => "Daftar Barang",
             "barangs" => $listBarang
         );
@@ -32,9 +32,9 @@ class Barang extends CI_Controller
     // Generate Barcode dan QR Code berdasarkan Kode Barcodenya
     public function createBarcode($id)
     {
-        $listBarang = $this->modelBarang->getByPrimaryKey($id);
+        $listBarang = $this->ModelBarang->getByPrimaryKey($id);
         $data = array(
-            "page" => "content/barang/barcode",
+            "page" => "Content/Barang/barcode",
             "header" => "Daftar Barang",
             "barangs" => $listBarang
         );
@@ -44,33 +44,33 @@ class Barang extends CI_Controller
     // Cetak data Barang
     function printDataBarang()
     {
-        $listBarang = $this->modelBarang->getJoin();
+        $listBarang = $this->ModelBarang->getJoin();
         $data = array(
             "barangs" => $listBarang,
         );
-        $html = $this->load->view('content/barang/print/databarang_print', $data, true);
+        $html = $this->load->view('Content/Barang/print/databarang_print', $data, true);
         $this->fungsi->createPDF($html, 'Print Data Barang', 'A4', 'potrait');
     }
 
     // Cetak barcode
     function printBarcode($id)
     {
-        $listBarang = $this->modelBarang->getByPrimaryKey($id);
+        $listBarang = $this->ModelBarang->getByPrimaryKey($id);
         $data = array(
             "barangs" => $listBarang
         );
-        $html = $this->load->view('content/barang/print/barcode_print', $data, true);
+        $html = $this->load->view('Content/Barang/print/barcode_print', $data, true);
         $this->fungsi->createPDF($html, 'barcode-' . $listBarang->barcode_barang, 'A4', 'landscape');
     }
 
     // Cetak QR CODE
     function printQrCode($id)
     {
-        $listBarang = $this->modelBarang->getByPrimaryKey($id);
+        $listBarang = $this->ModelBarang->getByPrimaryKey($id);
         $data = array(
             "barangs" => $listBarang
         );
-        $html = $this->load->view('content/barang/print/qrcode_print', $data, true);
+        $html = $this->load->view('Content/Barang/print/qrcode_print', $data, true);
         $this->fungsi->createPDF($html, 'qrcode-' . $listBarang->barcode_barang, 'A4', 'landscape');
     }
 
@@ -87,11 +87,11 @@ class Barang extends CI_Controller
         $barang->detail_barang = null;
         $barang->gambar_barang = null;
         // $barang = $this->modelBarang->getAll();
-        $kategori = $this->modelKategori->getAll();
+        $kategori = $this->ModelKategori->getAll();
 
         $data = array(
             "header" => "Tambah Data Barang",
-            "page" => "content/barang/v_from_item",
+            "page" => "Content/Barang/v_from_item",
             "pages" => 'register',
             "barangs" => $barang,
             "kategories" => $kategori
@@ -101,12 +101,12 @@ class Barang extends CI_Controller
 
     public function update($id)
     {
-        $listBarang = $this->modelBarang->getByPrimaryKey($id);
-        $kategori = $this->modelKategori->getAll();
+        $listBarang = $this->ModelBarang->getByPrimaryKey($id);
+        $kategori = $this->ModelKategori->getAll();
 
         $data = array(
             "header" => "Ubah Data Barang",
-            "page" => "content/barang/v_from_item",
+            "page" => "Content/Barang/v_from_item",
             "pages" => 'updates',
             "barangs" => $listBarang,
             "kategories" => $kategori
@@ -124,7 +124,7 @@ class Barang extends CI_Controller
         $this->load->library('upload', $config);
         $B = $this->input->post(null, TRUE);
         if (isset($_POST['register'])) {
-            if ($this->modelBarang->cek_barcode($B['barcode'])->num_rows() > 0) {
+            if ($this->ModelBarang->cek_barcode($B['barcode'])->num_rows() > 0) {
                 $this->session->set_flashdata('error', "Data Barcode sudah di pakai!");
                 redirect("Barang/register");
             } else {
@@ -141,7 +141,7 @@ class Barang extends CI_Controller
                             "detail_barang" => $this->input->post('detail_barang'),
                             "gambar_barang" => $C,
                         );
-                        $this->modelBarang->insert($barang);
+                        $this->ModelBarang->insert($barang);
                         if ($this->db->affected_rows() > 0) {
                             $this->session->set_flashdata('success', 'Data Sukses disimpan');
                         }
@@ -163,7 +163,7 @@ class Barang extends CI_Controller
                         "detail_barang" => $this->input->post('detail_barang'),
                         "gambar_barang" => $this->input->post('gambar'),
                     );
-                    $this->modelBarang->insert($barang);
+                    $this->ModelBarang->insert($barang);
                     if ($this->db->affected_rows() > 0) {
                         $this->session->set_flashdata('success', 'Data Sukses disimpan');
                     }
@@ -173,14 +173,14 @@ class Barang extends CI_Controller
             // Function jika update data Barang
         } else if (isset($_POST['updates'])) {
             $id = $this->input->post("id_barang", true);
-            if ($this->modelBarang->cek_barcode($B['barcode'], $B['id_barang'])->num_rows() > 0) {
+            if ($this->ModelBarang->cek_barcode($B['barcode'], $B['id_barang'])->num_rows() > 0) {
                 $this->session->set_flashdata('error', "Data Barcode sudah di pakai!");
                 redirect('Barang/update/' . $id);
             } else {
                 if (@$_FILES['gambar']['name'] != null) {
                     if ($this->upload->do_upload('gambar')) {
                         // Hapus gambar lama
-                        $brg =  $this->modelBarang->getByPrimaryKey($B['id_barang']);
+                        $brg =  $this->ModelBarang->getByPrimaryKey($B['id_barang']);
                         if ($brg->gambar_barang != null) {
                             $filehapus = './images/barang/' . $brg->gambar_barang;
                             unlink($filehapus);
@@ -198,7 +198,7 @@ class Barang extends CI_Controller
                         if ($B['gambar'] != null) {
                             $barang['gambar_barang'] = $B['gambar'];
                         }
-                        $this->modelBarang->update($id, $barang);
+                        $this->ModelBarang->update($id, $barang);
                         if ($this->db->affected_rows() > 0) {
                             $this->session->set_flashdata('success', 'Data Sukses disimpan');
                         }
@@ -217,9 +217,12 @@ class Barang extends CI_Controller
                         "kemasan_barang" => $this->input->post('kemasan_barang'),
                         "kategori_id" => $this->input->post('kategori'),
                         "detail_barang" => $this->input->post('detail_barang'),
-                        "gambar_barang" => $this->input->post('gambar'),
+                        // "gambar_barang" => $this->input->post('gambar'),
                     );
-                    $this->modelBarang->update($id, $barang);
+                    if ($B['gambar'] != null) {
+                        $barang['gambar_barang'] = $B['gambar'];
+                    }
+                    $this->ModelBarang->update($id, $barang);
                     if ($this->db->affected_rows() > 0) {
                         $this->session->set_flashdata('success', 'Data Sukses disimpan');
                     }
@@ -231,11 +234,11 @@ class Barang extends CI_Controller
 
     public function proses_delete($id)
     {
-        $brg =  $this->modelBarang->getByPrimaryKey($id);
+        $brg =  $this->ModelBarang->getByPrimaryKey($id);
         if ($brg->gambar_barang != null) {
             $filehapus = './images/barang/' . $brg->gambar_barang;
             unlink($filehapus);
         }
-        $this->modelBarang->delete($id);
+        $this->ModelBarang->delete($id);
     }
 }

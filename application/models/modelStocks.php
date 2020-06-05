@@ -1,6 +1,6 @@
 <?php
 
-class modelStocks extends CI_Model
+class ModelStocks extends CI_Model
 {
 	var $table = "stocks";
 	var $primaryKey = "id_stock";
