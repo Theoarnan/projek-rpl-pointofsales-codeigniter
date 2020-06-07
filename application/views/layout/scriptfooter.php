@@ -61,18 +61,19 @@
       "autoWidth": false,
     });
     $('#example2').DataTable({
-      "paging": true,
+      "paging": false,
       "lengthChange": false,
       "searching": false,
-      "ordering": true,
-      "info": true,
+      "ordering": false,
+      "info": false,
       "autoWidth": false,
       "responsive": true,
     });
   });
 </script>
 
-
+<!-- bs-custom-file-input -->
+<script src="<?= base_url(); ?>assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- Tambahan Ranus -->
 <script src="<?= base_url(); ?>vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url(); ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>

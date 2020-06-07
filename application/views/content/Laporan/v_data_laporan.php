@@ -96,14 +96,14 @@
                                 <div class="col-sm-2 col-6">
                                     <div class="description-block">
                                         <span class="description-percentage text-warning"><i class="fab fa-dropbox"></i></span>
-                                        <h5 class="description-header"><?= $stockSisa ?></h5>
+                                        <h5 class="description-header"><?= $stockSisa != null ? $stockSisa : '0' ?></h5>
                                         <span class="description-text">STOCK TERSISA</span>
                                     </div>
                                 </div>
                                 <div class="col-sm-2 col-6">
                                     <div class="description-block border-right">
                                         <span class="description-percentage text-danger"><i class="fas fa-arrow-up text-sm"></i></span>
-                                        <h5 class="description-header"><?= $stockin ?></h5>
+                                        <h5 class="description-header"><?= $stockin != null ? $stockSisa : '0'?></h5>
                                         <span class="description-text">STOCK IN</span>
                                     </div>
                                 </div>
@@ -111,7 +111,7 @@
                                 <div class="col-sm-2 col-6">
                                     <div class="description-block border-right">
                                         <span class="description-percentage text-success"><i class="fas fa-arrow-down text-sm"></i></span>
-                                        <h5 class="description-header"><?= $stockout ?></h5>
+                                        <h5 class="description-header"><?= $stockout != null ? $stockSisa : '0' ?></h5>
                                         <span class="description-text">STOCK OUT</span>
                                     </div>
                                 </div>

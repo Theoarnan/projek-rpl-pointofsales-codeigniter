@@ -12,27 +12,27 @@ class Stocks extends CI_Controller
         $this->load->model(['ModelStocks', 'ModelBarang', 'UserModel', 'ModelSupplier']);
     }
 
-    public function index()
-    {
-        $listStock = $this->ModelStocks->getJoin();
-        $data = array(
-            "page" => "Content/Stock/stock_in/v_data_stockin",
-            "header" => "Data Stock IN",
-            "stocks" => $listStock
-        );
-        $this->load->view("layout/dashboard", $data);
-    }
+    // public function index()
+    // {
+    //     $listStock = $this->ModelStocks->getJoin();
+    //     $data = array(
+    //         "page" => "Content/Stock/stock_in/v_data_stockin",
+    //         "header" => "Data Stock IN",
+    //         "stocks" => $listStock
+    //     );
+    //     $this->load->view("layout/dashboard", $data);
+    // }
 
-    public function indexOut()
-    {
-        $listStock = $this->ModelStocks->getJoin2();
-        $data = array(
-            "page" => "Content/Stock/stock_out/v_data_stockout",
-            "header" => "Data Stock Out",
-            "stocks" => $listStock
-        );
-        $this->load->view("layout/dashboard", $data);
-    }
+    // public function indexOut()
+    // {
+    //     $listStock = $this->ModelStocks->getJoin2();
+    //     $data = array(
+    //         "page" => "Content/Stock/stock_out/v_data_stockout",
+    //         "header" => "Data Stock Out",
+    //         "stocks" => $listStock
+    //     );
+    //     $this->load->view("layout/dashboard", $data);
+    // }
 
     public function riwayatStock()
     {

@@ -168,7 +168,7 @@
                             <h5 class="card-title">Top 5 Item Sales</h5>
                         </div>
                         <div class="card-body">
-                            <table id="" class="table table-bordered">
+                            <table id="example2" class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th style="width:1px;">No.</th>
@@ -200,7 +200,7 @@
                             <h5 class="card-title">Recent Transaksi</h5>
                         </div>
                         <div class="card-body">
-                            <table id="" class="table table-bordered">
+                            <table id="example2" class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th style="width:1px;">No.</th>

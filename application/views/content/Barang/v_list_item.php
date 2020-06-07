@@ -17,16 +17,15 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-10">
+                        <div class="col-8">
                             <a href="<?= site_url(array("Barang", "register")) ?>" class="btn btn-primary btn-sm"><i class="fas fa-plus-circle"></i>
                                 &nbsp;&nbsp;ADD DATA BARANG
                             </a> &nbsp;
-                            <!-- <a href="<?= site_url(array("Stocks")) ?>" class="btn btn-primary btn-sm"> <i class="fas fa-sign-in-alt"></i>
-                                &nbsp;&nbsp;STOCK IN
+                        </div>
+                        <div class="col-4">
+                            <a href="<?= site_url(array("Barang", "printDataBarang")) ?>" class="btn btn-success btn-sm float-right"><i class="fas fa-print"></i>
+                                &nbsp;&nbsp;PRINT ALL BARCODE
                             </a> &nbsp;
-                            <a href="<?= site_url(array("Stocks", "indexOut")) ?>" class="btn btn-primary btn-sm"> <i class="fas fa-sign-out-alt"></i>
-                                &nbsp;&nbsp;STOCK OUT
-                            </a> -->
                         </div>
                     </div>
                 </div>
@@ -65,7 +64,7 @@
                                         <a href="<?= site_url("Barang/update/$barang->id_barang") ?>" class="btn btn-sm btn-info" data-title="Edit"><i class="fas fa-pencil-alt"></i></a>
                                         <a href="#" data-id="<?= $barang->id_barang ?>" id="delete_id" class="btn btn-sm btn-danger tombolHapus">
                                             <i class="fas fa-trash"></i></a>
-                                        <!-- <a href="<?= site_url("Barang/detail/$barang->id_barang") ?>" class="btn btn-sm btn-warning" data-title="Edit"><i class="fas fa-eye"></i></a> -->
+                                        <a href="<?= site_url("Barang/detail/$barang->id_barang") ?>" class="btn btn-sm btn-warning" data-title="Edit"><i class="fas fa-eye"></i></a>
                                         <a href="<?= site_url("Barang/createBarcode/$barang->id_barang") ?>" class="btn btn-sm btn-success" data-title="Edit"><i class="fas fa-barcode"></i></a>
                                     </td>
                                 </tr>

@@ -52,6 +52,7 @@ class ModelBarang extends CI_Model
 		$this->db->join("kategori", 'kategori.id_kategori = barang.kategori_id');
 		if ($id != null) {
 			$this->db->where($this->primaryKey, $id);
+			return $this->db->get($this->table)->row();
 		}
 		return $this->db->get($this->table)->result();
 	}

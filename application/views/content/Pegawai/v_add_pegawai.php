@@ -95,15 +95,18 @@
         $("#form-tambah-pegawai").validate({
             rules: {
                 nomer: {
-                    digits: true
+                    digits: true,
+                    required: true,
+                    minlength: 5
                 },
                 alamat: {
                     required: true
                 }
             },
             messages: {
-                kode: {
-                    digits: "Hanya nomer saja"
+                nomer: {
+                    digits: "Hanya nomer saja",
+                    minlength: "Nomer 12 digit"
                 }
             },
             errorElement: 'span',

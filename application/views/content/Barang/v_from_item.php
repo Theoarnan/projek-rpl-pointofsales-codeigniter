@@ -135,7 +135,6 @@
         })
     })
 
-    // <!-- //Buat Preview Image -->
     $("#gambar_barang").change(function(event) {
         fadeInAdd();
         getURL(this);

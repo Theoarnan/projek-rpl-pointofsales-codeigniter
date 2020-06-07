@@ -49,7 +49,7 @@ class Barang extends CI_Controller
             "barangs" => $listBarang,
         );
         $html = $this->load->view('Content/Barang/print/databarang_print', $data, true);
-        $this->fungsi->createPDF($html, 'Print Data Barang', 'A4', 'potrait');
+        $this->fungsi->createPDF($html, 'PrintBarcode', 'A4', 'potrait');
     }
 
     // Cetak barcode
@@ -230,6 +230,17 @@ class Barang extends CI_Controller
                 }
             }
         }
+    }
+
+    public function detail($id)
+    {
+        $brg =  $this->ModelBarang->getJoin($id);
+        $data = array(
+            "header" => "Detail Barang",
+            "barang" => $brg,
+            "page" => "Content/Barang/v_detail_barang"
+        );
+        $this->load->view("layout/dashboard", $data);
     }
 
     public function proses_delete($id)

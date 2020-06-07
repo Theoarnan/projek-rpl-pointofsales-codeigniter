@@ -14,10 +14,18 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-10">
+                            <div class="col-8">
                                 <a href="<?= site_url(array("Transaksi", "tunda")) ?>" class="btn btn-info btn-flat btn-sm"><i class="fas fa-list-ul"></i>&nbsp;&nbsp;
                                     DAFTAR TRANSAKSI TUNDA
                                 </a>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <select class="custom-select" name="mode_transaksi">
+                                        <option value="Otomatis">Otomatis</option>
+                                        <option value="Manual">Manual</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -49,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 scan">
                                     <div class="form-group">
                                         <label>Scan Barang</label>
                                         <div class="input-group">
@@ -63,10 +71,42 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 selects">
+                                    <div class="form-group">
+                                        <label for="">Pilih Barang</label>
+                                        <select name="barang" class="form-control form-control-sm" id="select-barang" style="width: 100%;">
+                                            <option value="" disabled selected>Pilih Barang</option>
+                                            <?php
+                                            foreach ($barangs as $b) {
+                                                echo "<option data-nama='$b->nama_barang' "
+                                                    . " data-stock='$b->stock_barang' "
+                                                    . " data-kode='$b->barcode_barang' "
+                                                    . " data-harga='$b->harga_barang' "
+                                                    . " value='$b->id_barang' "
+                                                    . " $b->id_barang == $stocks->barang_id ? 'selected' : null> "
+                                                    . "$b->barcode_barang / $b->nama_barang / $b->harga_barang"
+                                                    . "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                        <input type="hidden" id="nama_brg">
+                                        <input type="hidden" id="stock_brg">
+                                        <input type="hidden" id="hargas_brg">
+                                        <input type="hidden" id="stock_awal">
+                                        <input type="hidden" id="kodes">
+                                        <input type="hidden" id="qty_keranjangs">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 jm">
                                     <div class="form-group">
                                         <label>Jumlah</label>
                                         <input type="text" class="form-control" id="jumlah-barang" value="1" min="1" name="jumlah_barang" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 btn-adds">
+                                    <div class="form-group">
+                                        <label>.</label><br>
+                                        <a href="" class="btn btn-primary" id="btn-add-barang"><i class="fas fa-plus"></i> Tambah</a>
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +164,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-striped">
+                        <table id="example2" class="table table-stripped">
                             <thead>
                                 <tr style="text-align:center">
                                     <!-- <th width="1%">No</th> -->
@@ -228,6 +268,8 @@
 
 <script>
     $(function() {
+        $('.selects').hide();
+        $('.btn-adds').hide();
         // Barcode
         $('#barcode_barang').keypress(function(event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -255,11 +297,11 @@
                         var barcode = barcodes;
                         var nama = data.nama_barang;
 
-                        
+
                         let jumlahBarang = $("#jumlah-barang").val();
                         let qty_keranjang = $("#qty_keranjangs").val();
 
-                        
+
                         let subTotal = parseInt(hargaBarang) * parseInt(jumlahBarang);
 
                         if (barcode == '' || idbarang == "") {
@@ -283,6 +325,7 @@
                                     tryAgain: {
                                         text: 'OKE',
                                         btnClass: 'btn-blue',
+                                        keys: ['enter'],
                                         action: function() {
                                             $("#barcode_barang").val("")
                                             $("#barcode_barang").focus()
@@ -407,6 +450,7 @@
             }
             var bayar = $("#bayar").val()
             bayar != 0 ? $('#kembalian').val(bayar - hitungtotalUtama) : $('#kembalian').val(0)
+            
         }
 
         // Otomatis update data ketika keyup atau mouseup
@@ -697,5 +741,135 @@
                 });
             }
         });
+
+        // Mode Manual
+        $('#btn-add-barang').on("click", function(e) {
+            event.preventDefault();
+            var barcode_barang = $("#kodes").val();
+            let jumlahBarang = $("#jumlah-barang").val();
+            // Function cek stock 
+            get_qty_keranjang(barcode_barang, jumlahBarang);
+
+            var barcodes = $("#barcodes").val($("#kodes").val());
+            var stock_awal = $("#stock_awal").val();
+            var idbarang = $("#select-barang").val();
+            var hargaBarang = $("#hargas_brg").val();
+            var stockBrg = $("#stock_brg").val();
+            var barcode = barcodes;
+            var nama = $("#nama_brg").val();
+            let qty_keranjang = $("#qty_keranjangs").val();
+            let subTotal = parseInt(hargaBarang) * parseInt(jumlahBarang);
+
+            if (barcode == '' || idbarang == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Belum memasukkan barcode!',
+                });
+                $("#barcode_barang").focus()
+            } else if (jumlahBarang < 1) {
+                $.alert({
+                    theme: 'modern',
+                    icon: 'fa fa-warning',
+                    title: 'Data Gagal diproses!',
+                    content: 'Stock Inputan 0 atau tidak ada!',
+                    boxWidth: '500px',
+                    useBootstrap: false,
+                    type: 'red',
+                    typeAnimated: true,
+                    buttons: {
+                        tryAgain: {
+                            text: 'OKE',
+                            btnClass: 'btn-blue',
+                            action: function() {
+                                $("#barcode_barang").val("")
+                                $("#barcode_barang").focus()
+                                $("#jumlah-barang").val(1)
+                            }
+                        },
+                    }
+                })
+            } else if (parseInt(stockBrg) < jumlahBarang || parseInt(stockBrg) < parseInt(qty_keranjang)) {
+                $.alert({
+                    theme: 'modern',
+                    icon: 'fa fa-warning',
+                    title: 'Data Gagal diproses!',
+                    content: 'Stock Tidak tersedia!',
+                    closeIcon: true,
+                    boxWidth: '500px',
+                    useBootstrap: false,
+                    type: 'red',
+                    typeAnimated: true,
+                    buttons: {
+                        tryAgain: {
+                            text: 'OKE',
+                            btnClass: 'btn-blue',
+                            action: function() {
+                                $("#barcode_barang").val("")
+                                $("#barcode_barang").focus()
+                                $("#jumlah-barang").val(1)
+                            }
+                        },
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url('Transaksi/proses') ?>",
+                    dataType: "JSON",
+                    data: {
+                        'add_keranjang': true,
+                        'id_barang': idbarang,
+                        'total': subTotal,
+                        'qty': jumlahBarang,
+                        'harga': hargaBarang,
+                    },
+                    success: function(result) {
+                        if (result.success == true) {
+                            $('#table_keranjang').load('<?= site_url('transaksi/keranjang_data ') ?>', function() {
+                                dataTransaksi()
+                            })
+                            $("#barcode_barang").val("")
+                            $("#jumlah-barang").val(1)
+                            $("#barcode_barang").focus()
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Gagal!',
+                            });
+                        }
+                    }
+                });
+            }
+        });
+        $("#select-barang").select2({
+            theme: 'bootstrap4'
+        }).on("change", function() {
+            var optionSelected = $(this).children("option:selected");
+            $("#kodes").val(optionSelected.data("kode"));
+            $("#nama_brg").val(optionSelected.data("nama"));
+            $("#hargas_brg").val(optionSelected.data("harga"));
+            $("#stock_brg").val(optionSelected.data("stock"));
+            $("#jumlah-barang").val(1);
+        });
     });
+</script>
+<script>
+    $(document).ready(function() {
+        $('[name="mode_transaksi"]').change(function() {
+            if ($('[name="mode_transaksi"]').val() === "Manual") {
+                $('.selects').show();
+                $('.btn-adds').show();
+                $('.jm').addClass('col-sm-4').removeClass('col-sm-6');
+                $('.scan').hide();
+            } else {
+                $('.selects').hide();
+                $('.btn-adds').hide();
+                $('.jm').addClass('col-sm-6').removeClass('col-sm-4');
+                $('.scan').show();
+            }
+        })
+
+    })
 </script>
