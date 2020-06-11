@@ -57,7 +57,6 @@
                                     <button data-id="<?= $user->id_user ?>" class="btn btn-warning btn-sm btn-reset-password">
                                         <i class="fas fa-key"></i>
                                     </button>
-                                    <a href="<?= site_url("User/update/$user->id_user") ?>" class="btn btn-sm btn-info" data-title="Edit"><i class="fas fa-pencil-alt"></i></a>
                                     <a href="#" data-id="<?= $user->id_user ?>" id="delete_id" class="btn btn-sm btn-danger tombolHapus">
                                         <i class="fas fa-trash"></i></a>
                                 </td>

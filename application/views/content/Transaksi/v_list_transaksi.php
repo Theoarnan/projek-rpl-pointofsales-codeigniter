@@ -48,7 +48,7 @@
                             <tr>
                                 <td><?= $no++ ?>.</td>
                                 <td><?= $t->no_transaksi ?></td>
-                                <td><?= getLevel($t->level) ?></td>
+                                <td><?= convertidUsertoLevel($t->user_id) ?></td>
                                 <td><?= $t->tanggal_transaksi ?></td>
                                 <td><?= formatRupiah($t->total_utama) ?></td>
                                 <td><?= formatRupiah($t->potongan) ?></td>

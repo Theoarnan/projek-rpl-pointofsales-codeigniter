@@ -103,7 +103,7 @@
                                 <div class="col-sm-2 col-6">
                                     <div class="description-block border-right">
                                         <span class="description-percentage text-danger"><i class="fas fa-arrow-up text-sm"></i></span>
-                                        <h5 class="description-header"><?= $stockin != null ? $stockSisa : '0'?></h5>
+                                        <h5 class="description-header"><?= $stockin != null ? $stockin : '0'?></h5>
                                         <span class="description-text">STOCK IN</span>
                                     </div>
                                 </div>
@@ -111,7 +111,7 @@
                                 <div class="col-sm-2 col-6">
                                     <div class="description-block border-right">
                                         <span class="description-percentage text-success"><i class="fas fa-arrow-down text-sm"></i></span>
-                                        <h5 class="description-header"><?= $stockout != null ? $stockSisa : '0' ?></h5>
+                                        <h5 class="description-header"><?= $stockout != null ? $stockout : '0' ?></h5>
                                         <span class="description-text">STOCK OUT</span>
                                     </div>
                                 </div>
@@ -139,7 +139,7 @@
                                         <tr>
                                             <td><?= $no++ ?>.</td>
                                             <td><?= $t->no_transaksi ?></td>
-                                            <td><?= getLevel($t->level) ?></td>
+                                            <td><?= convertidUsertoLevel($t->user_id) ?></td>
                                             <td><?= $t->tanggal_transaksi ?></td>
                                             <td><?= formatRupiah($t->total_utama) ?></td>
                                             <td><?= formatRupiah($t->potongan) ?></td>

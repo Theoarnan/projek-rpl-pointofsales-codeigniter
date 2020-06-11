@@ -99,17 +99,18 @@ class User extends CI_Controller
     // public function proses_update()
     // {
     //     $id = $this->input->post("id_user", true);
-    //     $users = array(
-    //         // "nama" => $this->input->post("namas",true),
-    //         "username" => $this->input->post("username", true),
-    //         "email" => $this->input->post("email", true),
-    //         "level" => $this->input->post("rolelevel", true),
-    //         "token" => md5($this->input->post("email", true)),
-    //         "password" => sha1($this->input->post("password", true))
-    //     );
-    //     $this->userModel->update($id, $users);
-    //     if ($this->db->from('user')->where("is_active" != 1)) {
-    //         $this->sendEmail($users);
+    //     $user = $this->input->post();
+    //     $passwordRandom = randomPassword();
+    //     $passwordRandom = randomPassword();
+	// 	$user["password"] = password_hash($passwordRandom,PASSWORD_DEFAULT);
+    //     $user["token"] = md5($user["email"]);
+    //     $user["first_login"] = 1;
+    //     $this->UserModel->update($user, $id);
+	// 	$user["password_generated"] = $passwordRandom;
+    //     sendEmail("Update Akun",$user, "Update");
+    //     redirect("User");
+    //     if ($this->db->from('user')->where("email" != 1)) {
+    //         sendEmail($user);
     //         redirect("User");
     //     }
     //     redirect("User");

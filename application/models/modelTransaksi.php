@@ -67,8 +67,7 @@ class ModelTransaksi extends CI_Model
 	// Get All Transaksi 
 	public function getAlls($range = null)
 	{
-		$this->db->select('transaksi.*, user.level as level')
-			->join("user", 'transaksi.user_id = user.id_user');
+		$this->db->select('transaksi.*');
 		if ($range != null) {
 			$this->db->where('tanggal_transaksi' . ' >=', $range['mulai']);
 			$this->db->where('tanggal_transaksi' . ' <=', $range['akhir']);
