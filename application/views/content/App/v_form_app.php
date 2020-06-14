@@ -246,14 +246,14 @@
                             <div class="card-footer">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <a href="" id="btn-cancel" class="btn btn-flat btn-sm btn-danger"><i class="fas fa-times"></i>&nbsp;&nbsp;BATAL TRANSAKSI</a>
+                                        <a href="" id="btn-cancel" name="btn-can" class="btn btn-flat btn-sm btn-danger"><i class="fas fa-times"></i>&nbsp;&nbsp;BATAL TRANSAKSI [F7]</a>
                                     </div>
                                     <div class="col-sm-4">
-                                        <a href="" id="btn-proses-transaksi" class="btn btn-sm btn-flat btn-success"><i class="fas fa-paper-plane"></i>&nbsp;&nbsp;PROSES TRANSAKSI</a>
+                                        <a href="" id="btn-proses-transaksi" class="btn btn-sm btn-flat btn-success"><i class="fas fa-paper-plane"></i>&nbsp;&nbsp;PROSES TRANSAKSI [F9]</a>
                                     </div>
                                     <div class="col-sm-4">
                                         <a href="" id="btn-tunda-transaksi" class="btn btn-info btn-flat btn-sm"><i class="fas fa-paperclip"></i>&nbsp;&nbsp;
-                                            SUSPEND TRANSAKSI
+                                            SUSPEND TRANSAKSI [F8]
                                         </a>
                                     </div>
                                 </div>
@@ -270,6 +270,22 @@
     $(function() {
         $('.selects').hide();
         $('.btn-adds').hide();
+        $("#barcode_barang, #bayar, #potongan").keyup(function(e) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if (keycode == '118') { //F7
+                event.preventDefault();
+                $('#btn-cancel').trigger('click');               
+            }else if (keycode == '120') { //F9
+                event.preventDefault();
+                $('#btn-proses-transaksi').trigger('click');
+            }else if (keycode == '119') { //F8
+                event.preventDefault();
+                $('#btn-tunda-transaksi').trigger('click');
+            }else if (keycode == '46') { //F8
+                event.preventDefault();
+                $('#hapus-keranjang').trigger('click');
+            }
+        });
         // Barcode
         $('#barcode_barang').keypress(function(event) {
             var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -450,7 +466,7 @@
             }
             var bayar = $("#bayar").val()
             bayar != 0 ? $('#kembalian').val(bayar - hitungtotalUtama) : $('#kembalian').val(0)
-            
+
         }
 
         // Otomatis update data ketika keyup atau mouseup

@@ -6,6 +6,7 @@ class Barang extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
+        checkActive();
         roleAkses();
         $this->load->model(['ModelBarang', 'ModelKategori']);
     }
@@ -174,7 +175,7 @@ class Barang extends CI_Controller
         } else if (isset($_POST['updates'])) {
             $id = $this->input->post("id_barang", true);
             if ($this->ModelBarang->cek_barcode($B['barcode'], $B['id_barang'])->num_rows() > 0) {
-                $this->session->set_flashdata('error', "Data Barcode sudah di pakai!");
+                $this->session->set_flashdata('error', "Kode Barcode sudah di pakai!");
                 redirect('Barang/update/' . $id);
             } else {
                 if (@$_FILES['gambar']['name'] != null) {
@@ -200,7 +201,7 @@ class Barang extends CI_Controller
                         }
                         $this->ModelBarang->update($id, $barang);
                         if ($this->db->affected_rows() > 0) {
-                            $this->session->set_flashdata('success', 'Data Sukses disimpan');
+                            $this->session->set_flashdata('success', 'Data Sukses diupdate');
                         }
                         redirect("Barang");
                     } else {

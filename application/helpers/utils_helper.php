@@ -110,6 +110,15 @@ function checkOnLogin()
 	}
 }
 
+function checkActive()
+{
+	$CI = &get_instance();
+	if ($CI->session->userdata('is_active') != 1) {
+		redirect("login");
+		// die();
+	}
+}
+
 function isAdmin()
 {
 	checkOnLogin();

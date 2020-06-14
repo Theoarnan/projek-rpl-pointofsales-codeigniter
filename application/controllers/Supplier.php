@@ -7,6 +7,7 @@ class Supplier extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
+        checkActive();
         roleAkses();
         $this->load->model("ModelSupplier");
     }
@@ -63,6 +64,7 @@ class Supplier extends CI_Controller
                 "no_telp" => $this->input->post('no_telpon')
             );
             $this->ModelSupplier->insert($supplier);
+            $this->session->set_flashdata('success', 'Data Sukses disimpan');
             redirect('Supplier/register');
         }
         // Proses Update data Supplier
@@ -82,7 +84,7 @@ class Supplier extends CI_Controller
             
         }
         if($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('success', 'Data Sukses disimpan');
+            $this->session->set_flashdata('success', 'Data Sukses diupdate');
         }
         redirect("Supplier");
     }

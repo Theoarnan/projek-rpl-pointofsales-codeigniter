@@ -7,6 +7,7 @@ class Welcome extends CI_Controller {
     {
 		parent::__construct();
 		checkOnLogin();
+		checkActive();
         // checkNoLogin();
         // roleAkses2();
         // roleAkses();
@@ -15,9 +16,6 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{
-		// $tanggal_start = $this->input->get("tanggal_start", TRUE);
-		// $tanggal_end = $this->input->get("tanggal_end", TRUE);
-		// die($tanggal_start. "===" .$tanggal_end);
 		$barang = $this->ModelBarang->hitungBarang();
 		$pegawai = $this->ModelPegawai->hitungPegawai();
 		$supplier = $this->ModelSupplier->hitungSupplier();

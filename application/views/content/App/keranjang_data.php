@@ -10,7 +10,7 @@ if ($keranjang->num_rows() > 0) {
             <td id="qty" style="text-align:center;"><?= $data->qty ?></td>
             <td id="tot-item" style="text-align:center;"><?= $data->total ?></td>
             <td style="text-align:center;">
-                <button id="hapus-keranjang" data-keranjangid="<?= $data->id_keranjang ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                <button id="hapus-keranjang" data-keranjangid="<?= $data->id_keranjang ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> [DEL]</button>
             </td>
         </tr>
 <?php

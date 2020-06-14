@@ -7,6 +7,7 @@ class Kategori extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
+        checkActive();
         roleAkses();
         $this->load->model("ModelKategori");
     }

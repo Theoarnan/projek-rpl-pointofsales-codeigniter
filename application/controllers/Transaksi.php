@@ -9,6 +9,7 @@ class Transaksi extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
+        checkActive();
         // roleAkses();
         $this->load->model(array("ModelBarang", "ModelTransaksi", "ModelItemTransaksi", "ModelKeranjang", "ModelTundaItemTransaksi", "ModelTundaTransaksi"));
     }

@@ -77,7 +77,7 @@
                                 <p>Data Transaksi</p>
                             </a>
                             <?php if ($this->fungsi->user_login()->level == 1) { ?>
-                            <a href="<?= site_url(array("Stocks", "riwayatStock")) ?>" class="nav-link">
+                            <a href="<?= site_url("Stocks") ?>" class="nav-link">
                                 <i class="fas fa-dolly nav-icon"></i>
                                 <p>Data Stock</p>
                             </a>

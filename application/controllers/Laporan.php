@@ -8,6 +8,7 @@ class Laporan extends CI_Controller
     {
         parent::__construct();
         checkOnLogin();
+        checkActive();
         // checkNoLogin();
         // roleAkses2();
         roleAkses();

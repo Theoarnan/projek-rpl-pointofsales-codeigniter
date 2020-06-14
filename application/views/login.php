@@ -1,3 +1,4 @@
+<?php $this->view('message') ?>
 <form action="<?= site_url('Login/proses') ?>" method="post" id="form-login">
     <div class="input-group mb-3">
         <input type="text" name="email" class="form-control" placeholder="Username atau Email" required>
@@ -26,7 +27,7 @@
     $(function() {
         $(".reveal").on('click', function() {
             console.log($(this).children("i"));
-            $(this).find("i").toggleClass("fas fa-lock fas fa-eye");
+            $(this).find("i").toggleClass("fas fa-unlock-alt fas fa-eye");
             var $pwd = $(this).siblings("input");
             if ($pwd.attr('type') === 'password') {
                 $pwd.attr('type', 'text');
@@ -37,13 +38,6 @@
         $("#btn-login").on("click", function() {
             let validate = $("#form-login").valid();
             if (validate) {
-                // Swal.fire({
-                //     title: "Processing Data..",
-                //     text: "Data sedang berkelana",
-                //     imageUrl: '<?= base_url() ?>' + "images/loadings.gif",
-                //     showConfirmButton: false,
-                //     allowOutsideClick: false
-                // });
                 $("#form-login").submit();
             }
         });

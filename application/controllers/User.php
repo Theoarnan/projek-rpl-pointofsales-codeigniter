@@ -7,6 +7,7 @@ class User extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
+        checkActive();
         roleAkses();
         $this->load->model(['UserModel', 'ModelPegawai']);
     }
@@ -115,6 +116,18 @@ class User extends CI_Controller
     //     }
     //     redirect("User");
     // }
+
+    public function update_is_active(){
+        $id = $this->input->post("id_user");
+        $datas = $this->input->post("datas");
+        $this->userModel->update_active($id, $datas);
+        if ($this->db->affected_rows() > 0) {
+            $data = array("success" => true,);
+        } else {
+            $data = array("success" => false);
+        }
+		echo json_encode($data);
+    }
 
     public function proses_hapus($id)
     {

@@ -52,7 +52,12 @@
                                 <td><?= $user->nama_pegawai ?></td>
                                 <td><?= $user->alamat_pegawai ?></td>
                                 <td><?= getLevel($user->level) ?></td>
-                                <td style="text-align: center"><span class="badge bg-primary"><?= formatStatus($user->is_active) ?></span></td>
+                                <!-- <td style="text-align: center"><span class="badge bg-primary"><?= formatStatus($user->is_active) ?></span></td> -->
+                                <td style="text-align: center">
+                                    <input class="form-control col-sm-4 btn_changepermission" id="changecative" type="checkbox" data-auid="<?= $user->id_user; ?>" <?php if ($user->is_active == 1) {
+                                                                                                                                                                        echo 'checked="checked"';
+                                                                                                                                                                    } ?>>
+                                </td>
                                 <td style="text-align: center">
                                     <button data-id="<?= $user->id_user ?>" class="btn btn-warning btn-sm btn-reset-password">
                                         <i class="fas fa-key"></i>
@@ -72,6 +77,65 @@
 </div>
 <script>
     $(function() {
+        $('.btn_changepermission').bootstrapSwitch({
+            size: 'small'
+        });
+        var stopchange = false;
+        $('.btn_changepermission').on('switchChange.bootstrapSwitch', function(e, state) {
+            var stopchange = false;
+            var obj = $(this);
+            var id_user = $(this).data('auid');
+            var datas = $(this).prop('checked');
+            if (stopchange === false) {
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url('User/update_is_active') ?>",
+                    dataType: "JSON",
+                    data: {
+                        'id_user': id_user,
+                        'datas': datas
+                    },
+                    success: function(result) {
+                        if (result.success == true) {
+                            $.confirm({
+                                    theme: 'modern',
+                                    icon: 'fas fa-success',
+                                    title: 'Data Di Update!',
+                                    content: false,
+                                    closeIcon: true,
+                                    boxWidth: '500px',
+                                    useBootstrap: false,
+                                    type: 'blue',
+                                    typeAnimated: true,
+                                    buttons: {
+                                        tryAgain: {
+                                            text: 'OKE',
+                                            btnClass: 'btn-blue',
+                                        },
+                                    }
+                                });
+                        }
+                         else {
+                            alert('Error:' + result);
+                            if (stopchange === false) {
+                                stopchange = true;
+                                obj.bootstrapSwitch('toggleState');
+                                stopchange = false;
+                            }
+                        }
+                    },
+                    error: function(result) {
+                        alert('Error! Unable to find this agentuser.');
+                        if (stopchange === false) {
+                            stopchange = true;
+                            obj.bootstrapSwitch('toggleState');
+                            stopchange = false;
+                        }
+                    }
+                });
+            }
+        });
+
         let idUser = 0;
         $(".tombolHapus").on("click", function() {
             var id = $(this).data('id');
@@ -81,6 +145,8 @@
         });
 
         var table = $('#table-user').DataTable({
+            "responsive": true,
+            "autoWidth": false,
             buttons: [{
                     extend: 'excelHtml5',
                     exportOptions: {

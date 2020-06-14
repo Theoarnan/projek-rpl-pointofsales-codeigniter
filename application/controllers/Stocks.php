@@ -8,6 +8,7 @@ class Stocks extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
+        checkActive();
         roleAkses();
         $this->load->model(['ModelStocks', 'ModelBarang', 'UserModel', 'ModelSupplier']);
     }
@@ -34,7 +35,7 @@ class Stocks extends CI_Controller
     //     $this->load->view("layout/dashboard", $data);
     // }
 
-    public function riwayatStock()
+    public function index()
     {
         $listStock = $this->ModelStocks->getJoin3();
         $data = array(

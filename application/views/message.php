@@ -7,7 +7,7 @@
 <?php } ?>
 
 <?php if ($this->session->has_userdata('error')) { ?>
-<div class="alert alert-error alert-dismissible" role="alert">
+<div class="alert alert-danger alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <i class="fas fa-ban"></i> <?= strip_tags(str_replace('<p>','', $this->session->flashdata('error'))) ; ?>
 </div>
