@@ -38,6 +38,16 @@
         $("#btn-login").on("click", function() {
             let validate = $("#form-login").valid();
             if (validate) {
+                Swal.fire({
+                    timerProgressBar: true,
+                    title: "Memproses Data..",
+                    text: "On Proccess!",
+                    // imageUrl: '<?= base_url() ?>' + "images/loadings.gif",
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    timer: 2000,
+                    delay: 2000
+                });
                 $("#form-login").submit();
             }
         });

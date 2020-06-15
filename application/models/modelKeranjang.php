@@ -64,15 +64,6 @@ class ModelKeranjang extends CI_Model
         return $query;
     }
 
-    // public function getQtyTemp($params = null){
-	// 	$this->db->select('qty');
-	// 	// $this->db->join("kategori", 'kategori.id_kategori = barang.kategori_id');
-	// 	if ($params != null) {
-	// 		$this->db->where($params);
-	// 	}
-	// 	return $this->db->get($this->table)->result();
-	// }
-
     // Hapus Keranjang
     public function delete_data_keranjang($params = null)
     {

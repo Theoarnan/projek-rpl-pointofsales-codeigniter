@@ -99,7 +99,6 @@
                             <div class="col-sm-12 col-sm-offset-12">
                                 <form id="register-stock" action="<?= site_url('stocks/proses') ?>" method="post" role="form">
                                     <input type="hidden" id="id" name="id_stock" value="<?= $stocks->id_stock; ?>" />
-                                    <!-- <label>DETAIL BARANG</label><br> -->
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Barcode</label>

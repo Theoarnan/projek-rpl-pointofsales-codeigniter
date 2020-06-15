@@ -9,7 +9,6 @@ class Transaksi extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
-        checkActive();
         // roleAkses();
         $this->load->model(array("ModelBarang", "ModelTransaksi", "ModelItemTransaksi", "ModelKeranjang", "ModelTundaItemTransaksi", "ModelTundaTransaksi"));
     }
@@ -47,7 +46,7 @@ class Transaksi extends CI_Controller
         echo json_encode($data);
     }
 
-    // Aplikasi Kasir
+    // View Aplikasi Kasir
     public function app()
     {
         $listBarang = $this->ModelBarang->getAll();
@@ -82,8 +81,6 @@ class Transaksi extends CI_Controller
         // Proses Tambah Keranjang
         if (isset($_POST['add_keranjang'])) {
             $idBarang = $this->input->post('id_barang');
-            // $cekQtyTemp = $this->input->post('qty');
-            // $QtyBarang = $this->modelBarang->getQtyBarang($idBarang);
             $cekQty = $this->ModelKeranjang->getKeranjang(['temp_keranjang.barang_id' => $idBarang])->num_rows();
                 if ($cekQty > 0) {
                     $this->ModelKeranjang->updateCartQty($data);

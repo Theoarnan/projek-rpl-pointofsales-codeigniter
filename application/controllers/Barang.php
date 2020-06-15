@@ -6,17 +6,8 @@ class Barang extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
-        checkActive();
         roleAkses();
         $this->load->model(['ModelBarang', 'ModelKategori']);
-    }
-
-    // Ambil data barang untuk transaksi scan berdasarkan barcode
-    function get_barang()
-    {
-        $kode = $this->input->post('barcode_barang');
-        $data = $this->ModelBarang->get_data_barang_bykode($kode);
-        echo json_encode($data);
     }
 
     public function index()

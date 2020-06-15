@@ -21,7 +21,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    <select class="custom-select" name="mode_transaksi">
+                                    <select class="custom-select custom-select-" name="mode_transaksi">
                                         <option value="Otomatis">Otomatis</option>
                                         <option value="Manual">Manual</option>
                                     </select>
@@ -133,29 +133,31 @@
                                     </div>
                                 </div>
                             </div><br>
-                            <div class="row" style="text-align: center;">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                            </div>
-                                            <input type="text" value="Umum" class="form-control" id="type-customer" name="type_cus" readonly>
+                        </form>
+                    </div>
+                    <div class="card-header">
+                        <div class="row" style="text-align: center;">
+                            <div class="col-sm-6">
+                                <!-- <div class="form-group"> -->
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         </div>
+                                        <input type="text" value="Umum" class="form-control" id="type-customer" name="type_cus" readonly>
                                     </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-tags"></i></span>
-                                            </div>
-                                            <input type="text" value="Cash" class="form-control" id="type-pembayaran" name="type_pembayaran" readonly>
+                                <!-- </div> -->
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-tags"></i></span>
                                         </div>
+                                        <input type="text" value="Cash" class="form-control" id="type-pembayaran" name="type_pembayaran" readonly>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -274,14 +276,14 @@
             var keycode = (event.keyCode ? event.keyCode : event.which);
             if (keycode == '118') { //F7
                 event.preventDefault();
-                $('#btn-cancel').trigger('click');               
-            }else if (keycode == '120') { //F9
+                $('#btn-cancel').trigger('click');
+            } else if (keycode == '120') { //F9
                 event.preventDefault();
                 $('#btn-proses-transaksi').trigger('click');
-            }else if (keycode == '119') { //F8
+            } else if (keycode == '119') { //F8
                 event.preventDefault();
                 $('#btn-tunda-transaksi').trigger('click');
-            }else if (keycode == '46') { //F8
+            } else if (keycode == '46') { //F8
                 event.preventDefault();
                 $('#hapus-keranjang').trigger('click');
             }
@@ -313,10 +315,8 @@
                         var barcode = barcodes;
                         var nama = data.nama_barang;
 
-
                         let jumlahBarang = $("#jumlah-barang").val();
                         let qty_keranjang = $("#qty_keranjangs").val();
-
 
                         let subTotal = parseInt(hargaBarang) * parseInt(jumlahBarang);
 

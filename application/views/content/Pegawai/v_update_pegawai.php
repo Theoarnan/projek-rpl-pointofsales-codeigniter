@@ -15,6 +15,7 @@
         </div>
     </div>
     <section class="content">
+    <?php $this->view('message') ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -75,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-center">
-                                <button id="btn-save" class="btn btn-primary btn-sm"><i class="fas fa-save"></i>&nbsp;&nbsp;SIMPAN DATA</button>&nbsp;&nbsp;
+                                <button id="btn-update-pegawai" class="btn btn-primary btn-sm"><i class="fas fa-save"></i>&nbsp;&nbsp;SIMPAN DATA</button>&nbsp;&nbsp;
                                 <button id="btn-reset" type="reset" class="btn btn-info btn-sm"><i class="fas fa-undo-alt"></i>&nbsp;&nbsp;RESET DATA</button>
                             </div>
                             <input type="hidden" id="id_pegawai" name="id_pegawai" value="<?= $pegawais->id_pegawai; ?>" />
@@ -85,5 +86,54 @@
             </div>
         </div>
     </section>
-    <!-- /.content -->
 </div>
+<script>
+    $(function() {
+        $("#btn-update-pegawai").on("click", function() {
+            let validate = $("#form-ubah-pegawai").valid();
+            if (validate) {
+                Swal.fire({
+                    timerProgressBar: true,
+                    title: "Memproses Data..",
+                    text: "On Proccess!",
+                    // imageUrl: '<?= base_url() ?>' + "images/loadings.gif",
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    timer: 2000,
+                    delay: 2000
+                });
+                $("#form-ubah-pegawai").submit();
+            }
+        });
+        
+        $("#form-ubah-pegawai").validate({
+            rules: {
+                nomer: {
+                    digits: true,
+                    required: true,
+                    minlength: 5
+                },
+                alamat: {
+                    required: true
+                }
+            },
+            messages: {
+                nomer: {
+                    digits: "Hanya nomer saja",
+                    minlength: "Nomer 12 digit"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
+</script>

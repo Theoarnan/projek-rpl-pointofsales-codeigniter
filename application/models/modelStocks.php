@@ -22,10 +22,6 @@ class ModelStocks extends CI_Model
             $this->db->where('created_at' . ' <=', $range['akhir']);
 		} 
 		return $this->db->get('stocks')->row()->jumlah;
-		
-		// $sql = "SELECT sum(jumlah) as jumlah FROM stocks WHERE type = 'In'";
-		// $result =  $this->db->query($sql);
-		// return $result->row()->jumlah;
 	}
 	
 	// Hitung Stock Out
@@ -37,9 +33,6 @@ class ModelStocks extends CI_Model
             $this->db->where('created_at' . ' <=', $range['akhir']);
 		} 
 		return $this->db->get('stocks')->row()->jumlah;
-		// $sql = "SELECT sum(jumlah) as jumlah FROM stocks WHERE type = 'Out'";
-		// $result =  $this->db->query($sql);
-		// return $result->row()->jumlah;
 	}
 
 	public function getByPrimaryKey($id){

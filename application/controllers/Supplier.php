@@ -7,7 +7,6 @@ class Supplier extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
-        checkActive();
         roleAkses();
         $this->load->model("ModelSupplier");
     }
@@ -55,7 +54,6 @@ class Supplier extends CI_Controller
     public function proses_simpan()
     {
         // Proses tambah Supplier
-        // $supplier = $this->input->post(null, TRUE);
         if (isset($_POST['register'])) {
             $supplier = array(
                 "nama_supplier" => $this->input->post('nama_supp'),

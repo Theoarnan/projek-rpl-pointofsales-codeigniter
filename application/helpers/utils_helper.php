@@ -1,20 +1,16 @@
 <?php
 
+// Konversi JK
 function getJenisKelaminLengkap($jk)
 {
 	return ($jk == "L") ? "Laki-Laki" : "Perempuan";
 }
-
+// Koversi Level
 function getLevel($level)
 {
 	return ($level == "1") ? "Admin" : "Kasir";
 }
-
-function formatStatus($status)
-{
-	return ($status == "1") ? "Active" : "Tidak Active";
-}
-
+// Send Email
 function sendEmail($subject, $data, $view)
 {
 	$CI = &get_instance();
@@ -38,7 +34,6 @@ function sendEmail($subject, $data, $view)
 	);
 	$body = $CI->load->view("Content/Email/" . $view, $data, TRUE);
 	$CI->email->initialize($config);
-	// $CI->email->from('noreply.alumni.sttii@gmail.com', 'PWL Aplikasi Kasir');
 	$CI->email->from('projekrpl4@gmail.com', 'POS Application');
 	$CI->email->to($data["email"]);
 	$CI->email->subject($subject);
@@ -50,7 +45,7 @@ function sendEmail($subject, $data, $view)
 		return "0";
 	}
 }
-
+// Random Password
 function randomPassword()
 {
 	$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
@@ -110,15 +105,6 @@ function checkOnLogin()
 	}
 }
 
-function checkActive()
-{
-	$CI = &get_instance();
-	if ($CI->session->userdata('is_active') != 1) {
-		redirect("login");
-		// die();
-	}
-}
-
 function isAdmin()
 {
 	checkOnLogin();
@@ -138,14 +124,14 @@ function isKasir()
 		die();
 	}
 }
-
+// Konversi supplier by id supplier
 function convertSupplier($id)
 {
 	$CI = &get_instance();
 	$covert = $CI->db->query("select nama_supplier as nama_supplier from supplier where id_supplier = '$id'");
 	return $covert->row()->nama_supplier;
 }
-
+// Konversi Level by Id User
 function convertidUsertoLevel($id)
 {
 	$CI = &get_instance();
@@ -153,23 +139,13 @@ function convertidUsertoLevel($id)
 	$hasil = $covert->row()->level;
 	return ($hasil == "1") ? "Admin" : "Kasir";
 }
-
+// Konversi Jumlah Item by Id Transaksi
 function convertidTransaksitoJumlahItem($id)
 {
 	$CI = &get_instance();
 	$covert = $CI->db->query("select SUM(qty_item_transaksi) as qty_item_transaksi from item_transaksi where id_transaksi = '$id'");
 	return $covert->row()->qty_item_transaksi;
-	// return ($hasil == "1") ? "Admin" : "Kasir";
 }
-
-// function checkOnLogin()
-// {
-// 	$ci = &get_instance();
-// 	$user_session = $ci->session->userdata('idUser');
-// 	if ($user_session) {
-// 		redirect('welcome');
-// 	}
-// }
 
 // Fungsi Cek User jika belum Login
 function checkNoLogin()
@@ -187,6 +163,7 @@ function formatRupiah($angka)
 	return "Rp." . number_format($angka, 2, ",", ".") . ",-";
 }
 
+// Cek Role Akses
 function roleAkses()
 {
 	$ci = &get_instance();

@@ -18,11 +18,6 @@ class UserModel extends CI_Model
 
 	public function getByEmailAndPassword($username, $password)
 	{
-		// $where = array(
-		// 	"email" => $username,
-		//     // "email" => $email,
-		//     // "password" => sha1($password
-		// );
 		$this->db->where('email', $username)->or_where('username', $username);
 		$user = $this->db->get("user")->row();
 		if (!$user) {

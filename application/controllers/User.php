@@ -7,7 +7,6 @@ class User extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
-        checkActive();
         roleAkses();
         $this->load->model(['UserModel', 'ModelPegawai']);
     }

@@ -15,6 +15,7 @@
         </div>
     </div>
     <section class="content">
+    <?php $this->view('message') ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -88,6 +89,16 @@
         $("#btn-save-pegawai").on("click", function() {
             let validate = $("#form-tambah-pegawai").valid();
             if (validate) {
+                Swal.fire({
+                    timerProgressBar: true,
+                    title: "Memproses Data..",
+                    text: "On Proccess!",
+                    // imageUrl: '<?= base_url() ?>' + "images/loadings.gif",
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    timer: 2000,
+                    delay: 2000
+                });
                 $("#form-tambah-pegawai").submit();
             }
         });

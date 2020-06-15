@@ -8,32 +8,9 @@ class Stocks extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
-        checkActive();
         roleAkses();
         $this->load->model(['ModelStocks', 'ModelBarang', 'UserModel', 'ModelSupplier']);
     }
-
-    // public function index()
-    // {
-    //     $listStock = $this->ModelStocks->getJoin();
-    //     $data = array(
-    //         "page" => "Content/Stock/stock_in/v_data_stockin",
-    //         "header" => "Data Stock IN",
-    //         "stocks" => $listStock
-    //     );
-    //     $this->load->view("layout/dashboard", $data);
-    // }
-
-    // public function indexOut()
-    // {
-    //     $listStock = $this->ModelStocks->getJoin2();
-    //     $data = array(
-    //         "page" => "Content/Stock/stock_out/v_data_stockout",
-    //         "header" => "Data Stock Out",
-    //         "stocks" => $listStock
-    //     );
-    //     $this->load->view("layout/dashboard", $data);
-    // }
 
     public function index()
     {
@@ -42,7 +19,6 @@ class Stocks extends CI_Controller
             "page" => "Content/Stock/v_all_data_stock",
             "header" => "Data Stock",
             "stocks" => $listStock,
-            // "stockss" => $listStocks
         );
         $this->load->view("layout/dashboard", $data);
     }
@@ -126,7 +102,6 @@ class Stocks extends CI_Controller
                 "id_stock" => $this->input->post('id_stock'),
                 "type" => "out",
                 "detail" => $this->input->post('detail'),
-                // "supplier_id" => $this->input->post('supplier') == ''? null : $this->input->post('supplier'),
                 'jumlah' =>  $this->input->post('jumlah'),
                 "tanggal" => $this->input->post('tanggal'),
                 "user_id" => $this->session->userdata('idUser'),

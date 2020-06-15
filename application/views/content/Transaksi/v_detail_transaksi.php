@@ -22,7 +22,6 @@
                         <h5><i class="fas fa-info-circle"></i> <?= $transaksis->no_transaksi ?></h5>
                     </div>
                     <div class="invoice p-3 mb-3">
-                        <!-- title row -->
                         <div class="row">
                             <div class="col-12">
                                 <h4>
@@ -34,11 +33,7 @@
                         <div class="row invoice-info">
                             <div class="col-sm-6 invoice-col">
                                 <br>
-                                <!-- <address>
-                                    <strong>KASIR</strong><br>
                                     <?= $transaksis->user_id ?><br>
-                                    Email: info@almasaeedstudio.com
-                                </address> -->
                             </div>
                             <div class="col-sm-6 invoice-col">
                                 <br>
@@ -79,7 +74,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <!-- /.col -->
                             <div class="col-6">
                             </div>
                             <div class="col-6">

@@ -8,9 +8,6 @@ class Laporan extends CI_Controller
     {
         parent::__construct();
         checkOnLogin();
-        checkActive();
-        // checkNoLogin();
-        // roleAkses2();
         roleAkses();
         $this->load->model(array("ModelBarang", "ModelPegawai", "ModelSupplier", "UserModel", "ModelTransaksi", "ModelStocks", "ModelItemTransaksi", "ModelTundaTransaksi"));
         $this->load->library('form_validation');

@@ -49,7 +49,6 @@
                                         <label>Jenis Kemasan</label>
                                         <select id="jenis_kemasan" name="kemasan_barang" class="form-control" style="width: 100%;" required>
                                             <option value="<?= $barangs->kemasan_barang ?>" <?= $barangs->kemasan_barang != null ? "selected" : 'Pilih Kemasan' ?>><?= $barangs->kemasan_barang != null ? $barangs->kemasan_barang : 'Pilih Kemasan'  ?></option>
-                                            <!-- <option class="" value="">Pilih Kemasan</option> -->
                                             <option value="PCS">PCS</option>
                                             <option value="Kardus">Kardus</option>
                                             <option value="Karung">Karung</option>
@@ -75,12 +74,10 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="gambar_barang">File Gambar</label>
-                                        <!-- <div class="input-group"> -->
                                         <div class="custom-file">
                                             <input type="file" value="<?= $barangs->gambar_barang ?>" class="form-control" id="gambar_barang" name="gambar">
                                             <label class="custom-file-label" for="gambar_barang">Choose file</label>
                                         </div>
-                                        <!-- </div> -->
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

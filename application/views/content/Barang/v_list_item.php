@@ -87,7 +87,6 @@
             SwalDelete(id);
             // e.preventDefault();
         });
-        // $('#table-barang').DataTables()
         var table = $('#table-barang').DataTable({
             "responsive": true,
             "autoWidth": false,

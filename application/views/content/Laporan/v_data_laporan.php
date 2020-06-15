@@ -1,23 +1,19 @@
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark jd">Laporan Penjualan</h1>
-                </div><!-- /.col -->
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
                         <li class="breadcrumb-item active">Laporan Penjualan</li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -34,7 +30,6 @@
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
                                             <input value="<?= set_value('tanggal'); ?>" name="tanggal" id="tanggal" type="text" class="form-control" placeholder="Periode Tanggal">
-                                            <!-- <span class="ts"></span> -->
                                         </div>
                                         <?= form_error('tanggal', '<small class="text-danger">', '</small>'); ?>
                                     </div>
@@ -76,7 +71,6 @@
                                         <span class="description-text">TOTAL TRANSAKSI</span>
                                     </div>
                                 </div>
-                                <!-- /.col -->
                                 <div class="col-sm-2 col-6">
                                     <div class="description-block border-right">
                                         <span class="description-percentage text-danger"><i class="fas fa-caret-square-up"></i></span>
@@ -84,7 +78,6 @@
                                         <span class="description-text">BARANG TERJUAL</span>
                                     </div>
                                 </div>
-                                <!-- /.col -->
                                 <div class="col-sm-2 col-6">
                                     <div class="description-block border-right">
                                         <span class="description-percentage text-success"><i class="fas fa-hand-holding-usd"></i></span>
@@ -92,7 +85,6 @@
                                         <span class="description-text">PENDAPATAN</span>
                                     </div>
                                 </div>
-                                <!-- /.col -->
                                 <div class="col-sm-2 col-6">
                                     <div class="description-block">
                                         <span class="description-percentage text-warning"><i class="fab fa-dropbox"></i></span>
@@ -107,7 +99,6 @@
                                         <span class="description-text">STOCK IN</span>
                                     </div>
                                 </div>
-                                <!-- /.col -->
                                 <div class="col-sm-2 col-6">
                                     <div class="description-block border-right">
                                         <span class="description-percentage text-success"><i class="fas fa-arrow-down text-sm"></i></span>
@@ -128,7 +119,6 @@
                                         <th>Total</th>
                                         <th>Potongan</th>
                                         <th style="text-align: center;">Total Item</th>
-                                        <!-- <th style="text-align:center">Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -144,9 +134,6 @@
                                             <td><?= formatRupiah($t->total_utama) ?></td>
                                             <td><?= formatRupiah($t->potongan) ?></td>
                                             <td style="text-align: center;"><?= convertidTransaksitoJumlahItem($t->id_transaksi) ?></td>
-                                            <!-- <td style="text-align:center">
-                                                <a href="<?= site_url("Transaksi/detail/$t->id_transaksi") ?>" class="btn btn-sm btn-warning" data-title="Edit"><i class="fas fa-search"></i></a>
-                                            </td> -->
                                         </tr>
                                     <?php
                                     }
@@ -156,7 +143,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- </div> -->
             </div>
         </div>
     </section>

@@ -15,6 +15,7 @@
         </div>
     </div>
     <section class="content">
+    <?php $this->view('message') ?>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

@@ -7,7 +7,6 @@ class Kategori extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
-        checkActive();
         roleAkses();
         $this->load->model("ModelKategori");
     }
@@ -76,9 +75,6 @@ class Kategori extends CI_Controller
     public function proses_delete($id)
     {
         $this->ModelKategori->delete($id);
-        if($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('success', 'Data Sukses dihapus');
-        }
         redirect("Kategori");
     }
 }

@@ -52,7 +52,6 @@
                                 <td><?= $user->nama_pegawai ?></td>
                                 <td><?= $user->alamat_pegawai ?></td>
                                 <td><?= getLevel($user->level) ?></td>
-                                <!-- <td style="text-align: center"><span class="badge bg-primary"><?= formatStatus($user->is_active) ?></span></td> -->
                                 <td style="text-align: center">
                                     <input class="form-control col-sm-4 btn_changepermission" id="changecative" type="checkbox" data-auid="<?= $user->id_user; ?>" <?php if ($user->is_active == 1) {
                                                                                                                                                                         echo 'checked="checked"';

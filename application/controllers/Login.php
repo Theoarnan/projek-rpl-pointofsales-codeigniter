@@ -11,8 +11,6 @@ class Login extends CI_Controller
 
     public function index()
     {
-        // checkOnLogin();
-
         $data["page"] = "login";
         $data["header"] = "Login POSApp";
         $this->load->view("layout/login", $data);
@@ -21,7 +19,6 @@ class Login extends CI_Controller
     public function proses()
     {
         $username =  $this->input->post("email", TRUE);
-        // $email =  $this->input->post("username", TRUE);
         $password =  $this->input->post("password", TRUE);
         $user = $this->UserModel->getByEmailAndPassword($username, $password);
         if ($user == null) {
@@ -29,7 +26,6 @@ class Login extends CI_Controller
             redirect("login");
         } else {
             if ($user->is_active == "0") {
-                // $this->error_login("Silahkan aktivasi akun anda");
                 $this->session->set_flashdata('error', 'Akun Anda belum di aktivasi!');
                 redirect("login");
             }
@@ -53,29 +49,6 @@ class Login extends CI_Controller
             
 
         }
-        // $post =  $this->input->post(null, TRUE);
-        // if (isset($post['login'])) {
-        //     $this->load->model('userModel');
-        //     $query = $this->userModel->login($post);
-        //     if ($query->num_rows() > 0) {
-        //         // echo "Login Sukses";
-        //         $row = $query->row();
-        //         $params = array(
-        //             'idUser' => $row->id_user,
-        //             'level' => $row->level
-        //         );
-        //         $this->session->set_userdata($params);
-        //         echo "<script>
-        //             alert('Selamat, Login Berhasil');
-        //             window.location='".site_url('Welcome')."';
-        //         </script>";
-        //     } else {
-        //         echo "<script>
-        //         alert('Ops, Login Gagal');
-        //         window.location='".site_url('Login')."';
-        //     </script>";;
-        //     }
-        // }
     }
 
     public function firstLogin()
@@ -107,12 +80,6 @@ class Login extends CI_Controller
         );
         $this->session->set_userdata($dataSession);
         redirect("welcome");
-    }
-
-    public function error_login($pesan)
-    {
-
-        echo $pesan;
     }
 
     public function logout()

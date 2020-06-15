@@ -30,10 +30,4 @@ class Fungsi
         // Output the generated PDF to Browser
         $dompdf->stream($filename, array('Attachment' => 0));
     }
-
-    // Hitung item
-    // public function hitungItem(){
-    //     $this->ci->load->model('modelBarang');
-    //     return $this->ci->modelBarang->getAll()->num_rows();
-    // }
 }

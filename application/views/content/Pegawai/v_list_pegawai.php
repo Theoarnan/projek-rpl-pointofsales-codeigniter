@@ -15,6 +15,7 @@
         </div>
     </div>
     <section class="content">
+    <?php $this->view('message') ?>
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -176,9 +177,6 @@
                                         tryAgain: {
                                             text: 'OKE',
                                             btnClass: 'btn-blue',
-                                            action: function() {
-                                                // window.location.replace("<?= site_url("Barang") ?>");
-                                            }
                                         },
                                     }
                                 })

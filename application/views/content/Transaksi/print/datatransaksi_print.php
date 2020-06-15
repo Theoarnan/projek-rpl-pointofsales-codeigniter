@@ -22,7 +22,6 @@
                 <th>Potongan</th>
                 <th>Bayar</th>
                 <th>Kembali</th>
-                <!-- <th style="text-align:center">Action</th> -->
             </tr>
         </thead>
         <tbody>
@@ -39,9 +38,6 @@
                     <td><?= formatRupiah($t->potongan) ?></td>
                     <td><?= formatRupiah($t->bayar) ?></td>
                     <td><?= formatRupiah($t->kembali) ?></td>
-                    <!-- <td style="text-align:center">
-                        <a href="<?= site_url("Transaksi/detail/$t->id_transaksi") ?>" class="btn btn-sm btn-warning" data-title="Edit"><i class="fas fa-search"></i></a>
-                    </td> -->
                 </tr>
             <?php
             }

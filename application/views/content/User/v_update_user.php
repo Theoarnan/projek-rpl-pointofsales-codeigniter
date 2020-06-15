@@ -147,7 +147,6 @@
                 },
                 passconf: {
                     required: "Masukkan password konfrimasi",
-                    // minlength: "Your password must be at least 5 characters long",
                     equalTo: "Password konfirmasi anda tidak sama!"
                 },
                 alamat: {

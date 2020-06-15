@@ -5,7 +5,6 @@ class Pegawai extends CI_Controller {
     public function __construct(){
         parent::__construct();
         checkNoLogin();
-        checkActive();
         roleAkses();
         $this->load->model("ModelPegawai");
     }
@@ -37,6 +36,9 @@ class Pegawai extends CI_Controller {
             "no_telp" => $this->input->post('nomer')
         );
         $this->ModelPegawai->insert($pegawai);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Data Sukses disimpan');
+        }
         redirect('Pegawai/register');
     }
 
@@ -63,7 +65,10 @@ class Pegawai extends CI_Controller {
             "jabatan" => $jbtn,
             "no_telp" => $nomer
 		);
-		$this->ModelPegawai->update($id, $pegawais);
+        $this->ModelPegawai->update($id, $pegawais);
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('success', 'Data Sukses diupdate');
+        }
 		redirect("Pegawai");
     }
     
