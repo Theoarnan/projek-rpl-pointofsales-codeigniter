@@ -55,7 +55,7 @@
                                         <td><?= $stock->tanggal ?></td>
                                         <td><?= $stock->supplier_id == null ? "Tidak Ada" : convertSupplier($stock->supplier_id) ?></td>
                                         <td><?= $stock->detail ?></td>
-                                        <td><?= getLevel($stock->level) ?></td>
+                                        <td><?= $stock->level ?></td>
                                     </tr>
                                 <?php
                                 }

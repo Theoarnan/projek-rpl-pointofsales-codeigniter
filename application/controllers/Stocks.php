@@ -8,7 +8,7 @@ class Stocks extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
-        roleAkses();
+        roleAkses2();
         $this->load->model(['ModelStocks', 'ModelBarang', 'UserModel', 'ModelSupplier']);
     }
 
@@ -96,23 +96,21 @@ class Stocks extends CI_Controller
             redirect("Stocks/stockin");
             // Proses Stock Out
         } else if (isset($_POST['Out'])) {
-            $jumlah = $this->input->post('jumlah', true);
-            $id = $this->input->post('barang', true);
-            $stock = array(
-                "id_stock" => $this->input->post('id_stock'),
-                "type" => "out",
-                "detail" => $this->input->post('detail'),
-                'jumlah' =>  $this->input->post('jumlah'),
-                "tanggal" => $this->input->post('tanggal'),
-                "user_id" => $this->session->userdata('idUser'),
-                'barang_id' => $this->input->post('barang')
-            );
-            $this->ModelBarang->kurangStock($jumlah, $id);
-            $this->ModelStocks->insert($stock);
-            if ($this->db->affected_rows() > 0) {
-                $this->session->set_flashdata('success', 'Data Stock-in Sukses disimpan');
+            $post = $this->input->post(null, true);
+            $row_barang =  $this->ModelBarang->getByPrimaryKey($this->input->post('barang', true));
+            if ($row_barang->stock_barang < $this->input->post('jumlah')) {
+                $this->session->set_flashdata('error', 'Jumlah barang yang dikeluarkan melebihi stock');
+                redirect('Stocks/stockout');
+            } else {
+                $this->ModelStocks->insert($post);
+                $this->ModelBarang->kurangStock($post);
+
+                if ($this->db->affected_rows() > 0) {
+                    // $this->session->set_flashdata('succes', 'Data berhasil disimpan');
+                    $this->session->set_flashdata('succes', 'Data Stock-out Sukses disimpan');
+                }
+                redirect('Stocks/stockout');
             }
-            redirect("Stocks/stockout");
         }
     }
 }

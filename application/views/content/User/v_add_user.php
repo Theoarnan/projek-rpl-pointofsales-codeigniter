@@ -15,9 +15,9 @@
         </div>
     </div>
     <section class="content">
-    <?php $this->view('message') ?>
+        <?php $this->view('message') ?>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-7">
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
@@ -31,7 +31,7 @@
                     <div class="card-body">
                         <form id="form-tambah-user" method="post" action="<?= site_url('User/proses_simpan') ?>" role="form">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="">Pilih Pegawai</label>
                                         <select name="pegawai_id" class="form-control" id="select-pegawai" style="width: 100%;">
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Username</label>
                                         <input type="text" class="form-control" id="username" name="username" placeholder="Enter ..." required>
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input type="email" class="form-control" id="email" name="email" placeholder="Enter ..." required></textarea>
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Role Level</label>
                                         <input type="text" value="" class="form-control" id="rolelevel" name="level" placeholder="--" readonly>
@@ -79,6 +79,53 @@
                             <div class="card-footer text-center">
                                 <button id="btn-save-user" type="button" class="btn btn-primary btn-sm"><i class="fas fa-save"></i>&nbsp;&nbsp;SIMPAN DATA</button>&nbsp;&nbsp;
                                 <button id="btn-reset" type="reset" class="btn btn-info btn-sm"><i class="fas fa-undo-alt"></i>&nbsp;&nbsp;RESET DATA</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-8">
+                                <h5>DETAIL PEGAWAI</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form id="form-tambah-user" method="post" action="<?= site_url('User/proses_simpan') ?>" role="form">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Nama Pegawai</label>
+                                        <input type="text" class="form-control" id="nama_peg" name="nama_peg" placeholder="--" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Alamat</label>
+                                        <input type="text" class="form-control" id="almt" name="almt" placeholder="--" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>No Telp</label>
+                                        <input type="email" class="form-control" id="notelp" name="notelp" placeholder="--" readonly></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Jabatan</label>
+                                        <input type="text" value="" class="form-control" id="jabatans" name="jabatans" placeholder="--" readonly>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -94,6 +141,12 @@
         }).on("change", function() {
             var optionSelected = $(this).children("option:selected");
             $("#rolelevel").val(optionSelected.data("jabatan"));
+            $("#nama_peg").val(optionSelected.data("nama"));
+            $("#almt").val(optionSelected.data("alamat"));
+            $("#notelp").val(optionSelected.data("telp"));
+            $("#jabatans").val(optionSelected.data("jabatan"));
+            $("#rolelevel").val($("#jabatans").val());
+
         });
 
         $("#btn-save-user").on("click", function() {

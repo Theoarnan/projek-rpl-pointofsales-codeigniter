@@ -5,7 +5,7 @@ class Pegawai extends CI_Controller {
     public function __construct(){
         parent::__construct();
         checkNoLogin();
-        roleAkses();
+        roleAkses2();
         $this->load->model("ModelPegawai");
     }
     

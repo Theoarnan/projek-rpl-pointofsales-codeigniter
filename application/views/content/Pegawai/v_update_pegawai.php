@@ -42,9 +42,9 @@
                                         <label>Pilih Jabatan</label>
                                         <select id="jabatan" name="jbtn" class="form-control" required>
                                             <option value="<?= $pegawais->jabatan ?>" <?= $pegawais->jabatan != null ? "selected" : 'disable selected' ?>><?= $pegawais->jabatan != null ? getLevel($pegawais->jabatan) : 'Pilih Jabatan'  ?></option>
-                                            <option value="1">Admin</option>
-                                            <option value="2">Kasir</option>
-                                            <option value="3">staff</option>
+                                            <option value="superadmin">Super Admin</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="kasir">Kasir</option>
                                         </select>
                                     </div>
                                 </div>

@@ -105,11 +105,11 @@ function checkOnLogin()
 	}
 }
 
-function isAdmin()
+function isSuperAdmin()
 {
 	checkOnLogin();
 	$CI = &get_instance();
-	if ($CI->session->userdata('level') != "1") {
+	if ($CI->session->userdata('level') != "superadmin") {
 		redirect("errors/forbidden");
 		die();
 	}
@@ -119,11 +119,22 @@ function isKasir()
 {
 	checkOnLogin();
 	$CI = &get_instance();
-	if ($CI->session->userdata('level') != "2") {
+	if ($CI->session->userdata('level') != "kasir") {
 		redirect("errors/forbidden");
 		die();
 	}
 }
+
+function isAdmin()
+{
+	checkOnLogin();
+	$CI = &get_instance();
+	if ($CI->session->userdata('level') != "admin") {
+		redirect("errors/forbidden");
+		die();
+	}
+}
+
 // Konversi supplier by id supplier
 function convertSupplier($id)
 {
@@ -136,8 +147,8 @@ function convertidUsertoLevel($id)
 {
 	$CI = &get_instance();
 	$covert = $CI->db->query("select level as level from user where id_user = '$id'");
-	$hasil = $covert->row()->level;
-	return ($hasil == "1") ? "Admin" : "Kasir";
+	return $covert->row()->level;
+	// return ($hasil == "1") ? "Admin" : "Kasir";
 }
 // Konversi Jumlah Item by Id Transaksi
 function convertidTransaksitoJumlahItem($id)
@@ -168,7 +179,7 @@ function roleAkses()
 {
 	$ci = &get_instance();
 	$ci->load->library('Fungsi');
-	if ($ci->fungsi->user_login()->level != 1) {
+	if ($ci->fungsi->user_login()->level != 'superadmin') {
 		redirect('welcome');
 	}
 }
@@ -177,7 +188,7 @@ function roleAkses2()
 {
 	$ci = &get_instance();
 	$ci->load->library('Fungsi');
-	if ($ci->fungsi->user_login()->level != 2) {
+	if ($ci->fungsi->user_login()->level == 'kasir') {
 		redirect('welcome');
 	}
 }

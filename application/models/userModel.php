@@ -49,10 +49,8 @@ class UserModel extends CI_Model
 
 	public function getJoin($id = null)
 	{
-		$where = "jabatan='1' OR jabatan='2'";
 		$this->db->select('user.*, pegawai.nama_pegawai as nama_pegawai, pegawai.jabatan as jabatan, pegawai.alamat_pegawai as alamat_pegawai')
-			->join("pegawai", 'pegawai.id_pegawai = user.pegawai_id')
-			->where($where);
+			->join("pegawai", 'pegawai.id_pegawai = user.pegawai_id');
 		if ($id != null) {
 			$this->db->where($this->primaryKey, $id);
 		}

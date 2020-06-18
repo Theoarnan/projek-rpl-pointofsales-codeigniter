@@ -7,7 +7,7 @@ class Supplier extends CI_Controller
     {
         parent::__construct();
         checkNoLogin();
-        roleAkses();
+        roleAkses2();
         $this->load->model("ModelSupplier");
     }
 

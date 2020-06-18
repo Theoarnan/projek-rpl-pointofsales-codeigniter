@@ -50,7 +50,7 @@
                                 <td><?= $pegawai->alamat_pegawai ?></td>
                                 <td><?= getJenisKelaminLengkap($pegawai->jenis_kelamin) ?></td>
                                 <td><?= $pegawai->no_telp ?></td>
-                                <td><?= getLevel($pegawai->jabatan) ?></td>
+                                <td><?= $pegawai->jabatan ?></td>
                                 <td style="text-align:center">
                                     <a href="<?= site_url("Pegawai/update/$pegawai->id_pegawai") ?>" class="btn btn-sm btn-info" data-title="Edit"><i class="fas fa-pencil-alt"></i></a>
                                     <a href="#" data-id="<?= $pegawai->id_pegawai ?>" id="delete_id" class="btn btn-sm btn-danger tombolHapus">

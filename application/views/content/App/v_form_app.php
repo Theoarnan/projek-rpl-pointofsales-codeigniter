@@ -179,7 +179,7 @@
                                 </tr>
                             </thead>
                             <tbody id="table_keranjang">
-                                <?php $this->view('content/app/keranjang_data') ?>
+                                <?php $this->view('Content/App/keranjang_data') ?>
                             </tbody>
                         </table>
                     </div>

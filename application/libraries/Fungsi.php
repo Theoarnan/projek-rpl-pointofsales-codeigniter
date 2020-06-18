@@ -12,9 +12,9 @@ class Fungsi
 
     function user_login()
     {
-        $this->ci->load->model('userModel');
+        $this->ci->load->model('UserModel');
         $idUser = $this->ci->session->userdata('idUser');
-        $user_data = $this->ci->userModel->getJoinById($idUser);
+        $user_data = $this->ci->UserModel->getJoinById($idUser);
         return $user_data;
     }
 

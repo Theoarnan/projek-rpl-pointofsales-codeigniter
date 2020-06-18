@@ -25,7 +25,7 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <?php if ($this->fungsi->user_login()->level == 1) { ?>
+                <?php if ($this->fungsi->user_login()->level == 'superadmin' || $this->fungsi->user_login()->level == 'admin') { ?>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
@@ -76,7 +76,7 @@
                                 <i class="fas fa-donate nav-icon"></i>
                                 <p>Data Transaksi</p>
                             </a>
-                            <?php if ($this->fungsi->user_login()->level == 1) { ?>
+                            <?php if ($this->fungsi->user_login()->level == 'superadmin' || $this->fungsi->user_login()->level == 'admin') { ?>
                             <a href="<?= site_url("Stocks") ?>" class="nav-link">
                                 <i class="fas fa-dolly nav-icon"></i>
                                 <p>Data Stock</p>
@@ -85,7 +85,7 @@
                         </li>
                     </ul>
                 </li>
-                <?php if ($this->fungsi->user_login()->level == 1) { ?>
+                <?php if ($this->fungsi->user_login()->level == 'superadmin') { ?>
                 <li class="nav-item has-treeview">
                     <a href="<?= site_url("Laporan") ?>" class="nav-link">
                         <i class="nav-icon fas fa-chart-line"></i>
@@ -113,7 +113,7 @@
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex"></div>
                 <li class="nav-header">OTHER MENU</li>
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <?php if ($this->fungsi->user_login()->level == 1) { ?>
+                    <?php if ($this->fungsi->user_login()->level == 'superadmin') { ?>
                         <li class="nav-item has-treeview">
                             <a href="<?= site_url('User') ?>" class="nav-link">
                                 <i class="nav-icon fas fa-users-cog"></i>

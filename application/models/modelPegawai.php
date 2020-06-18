@@ -5,9 +5,8 @@ class ModelPegawai extends CI_Model{
 	var $primaryKey = "id_pegawai";
 
 	public function getJoinJabatan($id = null){
-		$where = "jabatan='1' OR jabatan='2' OR jabatan='3'";
-		$this->db->select('pegawai.*, pegawai.nama_pegawai as nama_pegawai, pegawai.jabatan as jabatan')
-		->where($where);
+		// $where = "jabatan='1' OR jabatan='2' OR jabatan='3'";
+		$this->db->select('pegawai.*, pegawai.nama_pegawai as nama_pegawai, pegawai.jabatan as jabatan');
 		if ($id != null) {
 			$this->db->where($this->primaryKey, $id);
 		}

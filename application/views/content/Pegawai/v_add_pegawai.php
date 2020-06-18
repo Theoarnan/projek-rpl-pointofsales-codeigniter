@@ -41,9 +41,10 @@
                                     <div class="form-group">
                                         <label>Pilih Jabatan</label>
                                         <select id="jabatan" name="jbtn" class="form-control" required>
-                                            <option value="1">Admin</option>
-                                            <option value="2">Kasir</option>
-                                            <option value="3">Karyawan</option>
+                                            <option value="superadmin">Super Admin</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="kasir">Kasir</option>
+                                            <!-- <option value="3">Karyawan</option> -->
                                         </select>
                                     </div>
                                 </div>
