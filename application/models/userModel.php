@@ -96,7 +96,7 @@ class UserModel extends CI_Model
 
 	public function update_active($id, $data)
 	{
-		if ($data === "true") {
+		if ($data == "true") {
 			$this->db->where($this->primaryKey, $id);
 			return $this->db->update($this->table, array("is_active" => 1));
 		} else {

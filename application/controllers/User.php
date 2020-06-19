@@ -119,7 +119,7 @@ class User extends CI_Controller
     public function update_is_active(){
         $id = $this->input->post("id_user");
         $datas = $this->input->post("datas");
-        $this->userModel->update_active($id, $datas);
+        $this->UserModel->update_active($id, $datas);
         if ($this->db->affected_rows() > 0) {
             $data = array("success" => true,);
         } else {
